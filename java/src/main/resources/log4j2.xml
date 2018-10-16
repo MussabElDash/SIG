@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration debug="false" status="warn" name="XMLConfigTest"
+	monitorInterval="30">
+
+	<Appenders>
+
+		<!-- CONSOLE APPENDER -->
+
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%highlight{[%-5p: %d{yyyy-MM-dd HH:mm:ss} [%t] %l]}%n%m%n%n" />
+		</Console><!-- %C.%M(%F:%L) -->
+
+		<!-- LOG FILE APPENDERS -->
+
+		<RollingFile name="debugLog"
+			fileName="./log/DEBUG/application-debug.log"
+			filePattern="./log/DEBUG/application-debug-%d{yyyy-MM-dd}-%i.log">
+			<LevelRangeFilter minLevel="DEBUG" maxLevel="TRACE"
+				onMatch="ACCEPT" onMismatch="DENY" />
+			<PatternLayout
+				pattern="%highlight{[%-5p: %d{yyyy-MM-dd HH:mm:ss} [%t] %l] %m}%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+
+		<RollingFile name="infoLog"
+			fileName="./log/INFO/application-info.log"
+			filePattern="./log/INFO/application-info-%d{yyyy-MM-dd}-%i.log">
+			<LevelRangeFilter minLevel="INFO" maxLevel="INFO"
+				onMatch="ACCEPT" onMismatch="DENY" />
+			<PatternLayout
+				pattern="%highlight{[%-5p: %d{yyyy-MM-dd HH:mm:ss} [%t] %l] %m}%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+
+		<RollingFile name="warnLog"
+			fileName="./log/WARN/application-info.log"
+			filePattern="./log/WARN/application-warn-%d{yyyy-MM-dd}-%i.log">
+			<LevelRangeFilter minLevel="FATAL" maxLevel="WARN"
+				onMatch="ACCEPT" onMismatch="DENY" />
+			<PatternLayout
+				pattern="%highlight{[%-5p: %d{yyyy-MM-dd HH:mm:ss} [%t] %l] %m}%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+
+		<!-- HTML FILE APPENDERS -->
+
+		<RollingFile name="debugHTML"
+			fileName="./log/DEBUG/application-debug.html"
+			filePattern="./log/DEBUG/application-debug-%d{yyyy-MM-dd}-%i.html">
+			<LevelRangeFilter minLevel="DEBUG" maxLevel="TRACE"
+				onMatch="ACCEPT" onMismatch="DENY" />
+			<HTMLLayout charset="UTF-8" title="WOLF TRMS DEBUG Logs"
+				locationInfo="true" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="infoHTML"
+			fileName="./log/INFO/application-info.html"
+			filePattern="./log/INFO/application-info-%d{yyyy-MM-dd}-%i.html">
+			<LevelRangeFilter minLevel="INFO" maxLevel="INFO"
+				onMatch="ACCEPT" onMismatch="DENY" />
+			<HTMLLayout charset="UTF-8" title="WOLF TRMS DEBUG Logs"
+				locationInfo="true" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="warnHTML"
+			fileName="./log/WARN/application-info.html"
+			filePattern="./log/WARN/application-warn-%d{yyyy-MM-dd}-%i.html">
+			<LevelRangeFilter minLevel="FATAL" maxLevel="WARN"
+				onMatch="ACCEPT" onMismatch="DENY" />
+			<HTMLLayout charset="UTF-8" title="WOLF TRMS DEBUG Logs"
+				locationInfo="true" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		<Root level="all">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="debugLog" />
+			<AppenderRef ref="infoLog" />
+			<AppenderRef ref="warnLog" />
+			<AppenderRef ref="debugHTML" />
+			<AppenderRef ref="infoHTML" />
+			<AppenderRef ref="warnHTML" />
+		</Root>
+	</Loggers>
+
+</Configuration>
