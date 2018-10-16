@@ -22,7 +22,7 @@ CONSTRAINT user_pk PRIMARY KEY (username)
 );
 
 CREATE TABLE accounts (
-account_id NUMBER(10),
+account_id NUMBER(38),
 account_type VARCHAR(100),
 account_name VARCHAR(100),
 username VARCHAR(100),
@@ -59,7 +59,7 @@ CREATE TABLE securities(
    security_name VARCHAR2(100),
    ticker_symbol VARCHAR2(10),
    amount NUMBER(38),
-   account_id NUMBER(10),
+   account_id NUMBER(38),
 
    CONSTRAINT security_id_pk PRIMARY KEY (security_id),
 
@@ -69,7 +69,7 @@ CREATE TABLE securities(
 );
 
 CREATE TABLE trades (
-   trade_id NUMBER(6),
+   trade_id NUMBER(38),
    requestor_username VARCHAR2 (32),
    receiver_username VARCHAR2 (32),
    broker_status NUMBER (10),
