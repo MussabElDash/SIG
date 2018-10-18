@@ -1,4 +1,6 @@
-package com.revature;
+package com.revature.beans;
+
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +35,9 @@ public class Order {
 	
 	@Column(name="broker_status")
 	private String brokerStatus;
+	
+	@Column(name="created_on")
+	private Date createdOn;
 
 	public Long getId() {
 		return id;
@@ -74,18 +79,28 @@ public class Order {
 		this.brokerStatus = brokerStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", amount=" + amount + ", brokerStatus=" + brokerStatus + "]";
+	public Date getCreatedOn() {
+		return createdOn;
 	}
 
-	public Order(Long id, Account ownerAccount, AssetPricing ap, Long amount, String brokerStatus) {
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", amount=" + amount + ", brokerStatus=" + brokerStatus + ", createdOn=" + createdOn
+				+ "]";
+	}
+	
+	public Order(Long id, Account ownerAccount, AssetPricing ap, Long amount, String brokerStatus, Date createdOn) {
 		super();
 		this.id = id;
 		this.ownerAccount = ownerAccount;
 		this.ap = ap;
 		this.amount = amount;
 		this.brokerStatus = brokerStatus;
+		this.createdOn = createdOn;
 	}
 
 	public Order() {
