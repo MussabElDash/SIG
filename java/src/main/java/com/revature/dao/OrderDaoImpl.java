@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 
 import com.revature.beans.Order;
 import com.revature.beans.Security;
+import com.revature.util.HibernateUtil;
 
 public class OrderDaoImpl  implements OrderDao{
 
@@ -51,11 +52,12 @@ public class OrderDaoImpl  implements OrderDao{
 	@Override
 	public Order selectOrderById(Long id) {
 		Session session = HibernateUtil.getSession();
-		Security or = null;
+		Order or = null;
 		
 		try {
-			or = (Security)session.get(Security.class, id);
+			or = (Order)session.get(Order.class, id);
 		} catch (HibernateException e) {
+
 			e.printStackTrace();
 		} finally {
 			session.close();
@@ -65,14 +67,44 @@ public class OrderDaoImpl  implements OrderDao{
 	}
 
 	@Override
-	public Order updateOrder(Order s) {
-		// TODO Auto-generated method stub
-		return null;
+	public Order updateOrder(Order or) {
+		Order order = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			session.update(or);
+			
+			tx.commit();
+			
+		} catch (HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return order;
 	}
 
 	@Override
 	public void removeOrderById(Long id) {
-		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.delete(session.get(Order.class, id));
+			
+			tx.commit();
+			
+			
+		} catch (HibernateException e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
 		
 	}
 

@@ -6,7 +6,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.revature.beans.Candy;
 import com.revature.beans.Security;
 import com.revature.util.HibernateUtil;
 
@@ -73,20 +72,11 @@ public class SecurityDaoImpl implements SecurityDao{
 		
 		try {
 			tx = session.beginTransaction();
-			security = (Security)session.get(Security.class, s.getId());
-			
-			
-			
-			security.setName(s.getName());
-			security.setAmount(s.getAmount());
-			security.setOwnerAccount(s.getOwnerAccount());
-			security.setAp(s.getAp());
-			security.setType(s.getType());
-			
-			session.save(security);
+			session.update(s);
 			tx.commit();
 			
 		} catch (HibernateException e) {
+			tx.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
