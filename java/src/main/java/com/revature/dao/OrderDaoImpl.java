@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -55,7 +56,11 @@ public class OrderDaoImpl  implements OrderDao{
 		Order or = null;
 		
 		try {
-			or = (Order)session.get(Order.class, id);
+			
+			Query query = session.createQuery("FROM Order WHERE id = :givenId");
+			query.setParameter("givenId", id);
+			or = (Order) query.uniqueResult();
+			
 		} catch (HibernateException e) {
 
 			e.printStackTrace();

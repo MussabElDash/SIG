@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -54,7 +55,11 @@ public class SecurityDaoImpl implements SecurityDao{
 		Security s = null;
 		
 		try {
-			s = (Security)session.get(Security.class, id);
+			
+			Query query = session.createQuery("FROM Security WHERE id = :givenId");
+			query.setParameter("givenId", id);
+			s = (Security) query.uniqueResult();
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
