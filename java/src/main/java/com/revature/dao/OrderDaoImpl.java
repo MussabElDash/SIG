@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.beans.Order;
-import com.revature.beans.Security;
 import com.revature.util.HibernateUtil;
 
 public class OrderDaoImpl  implements OrderDao{
@@ -72,8 +71,7 @@ public class OrderDaoImpl  implements OrderDao{
 	}
 
 	@Override
-	public Order updateOrder(Order or) {
-		Order order = null;
+	public boolean updateOrder(Order or) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		
@@ -82,14 +80,15 @@ public class OrderDaoImpl  implements OrderDao{
 			session.update(or);
 			
 			tx.commit();
+			return true;
 			
 		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
+			return false;
 		} finally {
 			session.close();
 		}
-		return order;
 	}
 
 	@Override

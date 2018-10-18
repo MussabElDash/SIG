@@ -8,6 +8,7 @@ public interface SecurityDao {
 	public Long insertSecurity(Security security);
 	public List<Security> getAllSecurities();
 	public Security selectSecurityById(Long id);
-	public Security updateSecurity(Security s);
+	public boolean updateSecurity(Security s);
 	public void removeSecurityById(Long id);
+	public List<Security> getSecuritiesByAccount(Account acct);
 }

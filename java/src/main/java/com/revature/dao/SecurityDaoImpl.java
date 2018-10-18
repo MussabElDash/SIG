@@ -70,8 +70,7 @@ public class SecurityDaoImpl implements SecurityDao{
 	}
 
 	@Override
-	public Security updateSecurity(Security s) {
-		Security security = null;
+	public boolean updateSecurity(Security s) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		
@@ -79,14 +78,16 @@ public class SecurityDaoImpl implements SecurityDao{
 			tx = session.beginTransaction();
 			session.update(s);
 			tx.commit();
+			return true;
 			
 		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
+			return false;
 		} finally {
 			session.close();
 		}
-		return security;
+
 	}
 
 	@Override
@@ -104,10 +105,33 @@ public class SecurityDaoImpl implements SecurityDao{
 			
 		} catch (HibernateException e) {
 			tx.rollback();
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
 		
+	}
+
+	@Override
+	public List<Security> getSecuritiesByAccount(Account acct) {
+		
+		List<Security> securities = null;
+		Session session = HibernateUtil.getSession();
+		
+		try {
+			
+			Query query = session.createQuery("FROM Security WHERE OwnerAccount = :givenAcct");
+			query.setParameter("givenAcct", acct);
+			
+			securities = query.list();
+			
+			
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			
+		}
 	}
 
 }

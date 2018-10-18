@@ -8,6 +8,6 @@ public interface OrderDao {
 	public Long insertOrder(Order order);
 	public List<Order> getAllSecurities();
 	public Order selectOrderById(Long id);
-	public Order updateOrder(Order s);
+	public boolean updateOrder(Order s);
 	public void removeOrderById(Long id);
 }

@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import 
 
 @Entity //Marks the class as a persistent class
 @Table(name="securities")
@@ -20,65 +19,48 @@ public class Security {
 	@Column(name="security_id")
 	@SequenceGenerator(sequenceName="securities_seq", name="securities_seq")
 	@GeneratedValue(generator="securities_seq", strategy = GenerationType.SEQUENCE)
-	private Long Id;
+	private Long id;
 	
 	@Column(name="security_type")
-	private String Type;
+	private String type;
 	
 	@Column(name="security_name")
-	private String Name;
+	private String name;
 	
 	@ManyToOne
 	@JoinColumn(name="ticker_symbol")
 	private AssetPricing ap;
 	
 	@Column(name="amount")
-	private Long Amount;
+	private Long amount;
 	
 	@ManyToOne
 	@JoinColumn(name="account_id")
-	private Account OwnerAccount;
+	private Account ownerAccount;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getType() {
-		return Type;
+		return type;
 	}
 
 	public void setType(String type) {
-		Type = type;
+		this.type = type;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
-
-	public Long getAmount() {
-		return Amount;
-	}
-
-	public void setAmount(Long amount) {
-		Amount = amount;
-	}
-
-	public Long getOwnerAccount() {
-		return OwnerAccount;
-	}
-
-	public void setOwnerAccount(Account owneraccount) {
-		OwnerAccount = owneraccount;
-	}
-	
 
 	public AssetPricing getAp() {
 		return ap;
@@ -88,20 +70,35 @@ public class Security {
 		this.ap = ap;
 	}
 
-	@Override
-	public String toString() {
-		return "Securities [Id=" + Id + ", Type=" + Type + ", Name=" + Name + ", Amount=" + Amount + "]";
+	public Long getAmount() {
+		return amount;
 	}
 
+	public void setAmount(Long amount) {
+		this.amount = amount;
+	}
+
+	public Account getOwnerAccount() {
+		return ownerAccount;
+	}
+
+	public void setOwnerAccount(Account ownerAccount) {
+		this.ownerAccount = ownerAccount;
+	}
+
+	@Override
+	public String toString() {
+		return "Security [id=" + id + ", type=" + type + ", name=" + name + ", amount=" + amount + "]";
+	}
 
 	public Security(Long id, String type, String name, AssetPricing ap, Long amount, Account ownerAccount) {
 		super();
-		Id = id;
-		Type = type;
-		Name = name;
+		this.id = id;
+		this.type = type;
+		this.name = name;
 		this.ap = ap;
-		Amount = amount;
-		OwnerAccount = ownerAccount;
+		this.amount = amount;
+		this.ownerAccount = ownerAccount;
 	}
 
 	public Security() {
