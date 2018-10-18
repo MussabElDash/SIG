@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,10 +46,12 @@ public class Trades {
 	@Column (name="amount_receiver")
 	private Long amountReceiver;
 	
+	@Column (name="created_on")
+	private Date createdOn;
+	
 	@ManyToOne
 	@JoinColumn(name="username")
 	private User u;
-	
 	
 	public Long getTradeId() {
 		return tradeId;
@@ -103,16 +107,30 @@ public class Trades {
 	public void setAmountReceiver(Long amountReceiver) {
 		this.amountReceiver = amountReceiver;
 	}
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+	public User getU() {
+		return u;
+	}
+	public void setU(User u) {
+		this.u = u;
+	}
+	
 	@Override
 	public String toString() {
 		return "Trades [tradeId=" + tradeId + ", requestorUsername=" + requestorUsername + ", receiverUsername="
 				+ receiverUsername + ", brokerStatus=" + brokerStatus + ", receiverApproval=" + receiverApproval
 				+ ", securityIdRequestor=" + securityIdRequestor + ", secutiyIdReceiver=" + secutiyIdReceiver
-				+ ", amountRequestor=" + amountRequestor + ", amountReceiver=" + amountReceiver + "]";
+				+ ", amountRequestor=" + amountRequestor + ", amountReceiver=" + amountReceiver + ", createdOn="
+				+ createdOn + "]";
 	}
 	public Trades(Long tradeId, String requestorUsername, String receiverUsername, Long brokerStatus,
 			Long receiverApproval, Long securityIdRequestor, Long secutiyIdReceiver, Long amountRequestor,
-			Long amountReceiver) {
+			Long amountReceiver, Date createdOn, User u) {
 		super();
 		this.tradeId = tradeId;
 		this.requestorUsername = requestorUsername;
@@ -123,9 +141,12 @@ public class Trades {
 		this.secutiyIdReceiver = secutiyIdReceiver;
 		this.amountRequestor = amountRequestor;
 		this.amountReceiver = amountReceiver;
+		this.createdOn = createdOn;
+		this.u = u;
 	}
 	public Trades(String requestorUsername, String receiverUsername, Long brokerStatus, Long receiverApproval,
-			Long securityIdRequestor, Long secutiyIdReceiver, Long amountRequestor, Long amountReceiver) {
+			Long securityIdRequestor, Long secutiyIdReceiver, Long amountRequestor, Long amountReceiver, Date createdOn,
+			User u) {
 		super();
 		this.requestorUsername = requestorUsername;
 		this.receiverUsername = receiverUsername;
@@ -135,10 +156,13 @@ public class Trades {
 		this.secutiyIdReceiver = secutiyIdReceiver;
 		this.amountRequestor = amountRequestor;
 		this.amountReceiver = amountReceiver;
+		this.createdOn = createdOn;
+		this.u = u;
 	}
 	public Trades() {
 		super();
 	}
+	
 	
 
 }
