@@ -1,4 +1,4 @@
-package com.revature.sig.util;
+package com.revature.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
