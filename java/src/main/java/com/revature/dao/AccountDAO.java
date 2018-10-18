@@ -7,7 +7,7 @@ import com.revature.beans.User;
 
 public interface AccountDAO {
 
-	public Account getAccount(int id);
+	public Account getAccount(long id);
 	public List<Account> getAccountsByUser(User u);
 	public Long addAccount(Account a);
 	public boolean removeAccount(Account a);

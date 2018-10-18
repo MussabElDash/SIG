@@ -18,7 +18,7 @@ public class AccountDAOImpl implements AccountDAO{
 	 * by its ID (primary key).
 	 */
 	@Override
-	public Account getAccount(int id) {
+	public Account getAccount(long id) {
 		
 		Account a = null;
 		Session session = HibernateUtil.getSession();
