@@ -10,27 +10,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.revature.beans.User;
+
 @Entity
-@Table(name="accounts")
+@Table(name = "accounts")
 public class Account {
 
 	@Id
-	@Column(name="account_id")
-	@SequenceGenerator(sequenceName="acc_seq", name="acc_seq")
-	@GeneratedValue(generator="acc_seq", strategy = GenerationType.SEQUENCE)
+	@Column(name = "account_id")
+	@SequenceGenerator(sequenceName = "acc_seq", name = "acc_seq")
+	@GeneratedValue(generator = "acc_seq", strategy = GenerationType.SEQUENCE)
 	private Long id;
-	
-	@Column(name="account_type")
+
+	@Column(name = "account_type")
 	private String accountType;
-	
-	@Column(name="account_name")
+
+	@Column(name = "account_name")
 	private String accountName;
-	
-	@Column(name="balance")
+
+	@Column(name = "balance")
 	private Double balance;
-	
+
 	@ManyToOne
-	@JoinColumn(name="username")
+	@JoinColumn(name = "username")
 	private User owner;
 
 	public Account(long id, String accountType, String accountName, double balance, User owner) {
@@ -91,5 +93,5 @@ public class Account {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
-	
+
 }
