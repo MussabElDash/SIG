@@ -10,15 +10,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import 
+
 @Entity //Marks the class as a persistent class
 @Table(name="securities")
-public class Securities {
+public class Security {
 	
 	@Id //Marks as a primary key
 	@Column(name="security_id")
 	@SequenceGenerator(sequenceName="securities_seq", name="securities_seq")
 	@GeneratedValue(generator="securities_seq", strategy = GenerationType.SEQUENCE)
-	private Integer Id;
+	private Long Id;
 	
 	@Column(name="security_type")
 	private String Type;
@@ -28,20 +30,20 @@ public class Securities {
 	
 	@ManyToOne
 	@JoinColumn(name="ticker_symbol")
-	private String TickerSymbol;
+	private AssetPricing ap;
 	
 	@Column(name="amount")
-	private Integer Amount;
+	private Long Amount;
 	
 	@ManyToOne
 	@JoinColumn(name="account_id")
-	private Integer AccountId;
+	private Account OwnerAccount;
 
-	public Integer getId() {
+	public Long getId() {
 		return Id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 
@@ -61,28 +63,29 @@ public class Securities {
 		Name = name;
 	}
 
-	public String getTickerSymbol() {
-		return TickerSymbol;
-	}
-
-	public void setTickerSymbol(String tickerSymbol) {
-		TickerSymbol = tickerSymbol;
-	}
-
-	public Integer getAmount() {
+	public Long getAmount() {
 		return Amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		Amount = amount;
 	}
 
-	public Integer getAccountId() {
-		return AccountId;
+	public Long getOwnerAccount() {
+		return OwnerAccount;
 	}
 
-	public void setAccountId(Integer accountId) {
-		AccountId = accountId;
+	public void setOwnerAccount(Account owneraccount) {
+		OwnerAccount = owneraccount;
+	}
+	
+
+	public AssetPricing getAp() {
+		return ap;
+	}
+
+	public void setAp(AssetPricing ap) {
+		this.ap = ap;
 	}
 
 	@Override
@@ -90,17 +93,18 @@ public class Securities {
 		return "Securities [Id=" + Id + ", Type=" + Type + ", Name=" + Name + ", Amount=" + Amount + "]";
 	}
 
-	public Securities(Integer id, String type, String name, String tickerSymbol, Integer amount, Integer accountId) {
+
+	public Security(Long id, String type, String name, AssetPricing ap, Long amount, Account ownerAccount) {
 		super();
 		Id = id;
 		Type = type;
 		Name = name;
-		TickerSymbol = tickerSymbol;
+		this.ap = ap;
 		Amount = amount;
-		AccountId = accountId;
+		OwnerAccount = ownerAccount;
 	}
 
-	public Securities() {
+	public Security() {
 		super();
 	}
 
