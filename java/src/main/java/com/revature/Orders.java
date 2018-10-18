@@ -2,7 +2,12 @@ package com.revature;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity 
@@ -11,12 +16,16 @@ public class Orders {
 	
 	@Id //Marks as a primary key
 	@Column(name="order_id")
+	@SequenceGenerator(sequenceName="order_seq", name="order_seq")
+	@GeneratedValue(generator="order_seq", strategy = GenerationType.SEQUENCE)
 	private Integer Id;
 	
-	@Column(name="account_id")
+	@ManyToOne
+	@JoinColumn(name="account_id")
 	private Integer AccountId;
 	
-	@Column(name="ticker_symbol")
+	@ManyToOne
+	@JoinColumn(name="ticker_symbol")
 	private String TickerSymbol;
 	
 	@Column(name="amount")

@@ -23,11 +23,11 @@
 		</property>
 
 		<property name="hibernate.connection.username">
-			local_180910
+			SIG
 		</property>
 
 		<property name="hibernate.connection.password">
-			admin
+			Woodsy
 		</property>
 
 		<!-- This determines how many connections a single user can have to the 
@@ -56,13 +56,8 @@
 		</property>
 
 		<mapping resource="candy.hbm.xml" />
-		<mapping class="com.revature.beans.Family" />
-		<mapping class="com.revature.beans.Member" />
-		<mapping class="com.revature.beans.Status"/>
-		<mapping class="com.revature.beans.Task"/>
-		<mapping class="com.revature.beans.TaskStatus"/>
-
-		<mapping class="com.revature.beans.Rank" />
+		<mapping class="com.revature.beans.Securities" />
+		<mapping class="com.revature.beans.Orders" />
 
 
 	</session-factory>
