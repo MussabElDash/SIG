@@ -55,7 +55,6 @@
 			update
 		</property>
 
-		<mapping resource="candy.hbm.xml" />
 		<mapping class="com.revature.beans.Securities" />
 		<mapping class="com.revature.beans.Orders" />
 
