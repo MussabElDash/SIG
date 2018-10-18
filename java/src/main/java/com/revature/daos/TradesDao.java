@@ -6,11 +6,11 @@ import com.revature.beans.Trades;
 
 public interface TradesDao {
 	
-	public void insertTrades (Trades trades);
+	public long insertTrades (Trades trades);
 	public Trades selectTradesByTradeId(Long tradeId);
-	public Trades selectTradesByUsername(String username);
+	public List<Trades> selectTradesByUser(User user);
 	public List<Trades> selectAllTrades();
-	public Integer deleteTradesByTradeId(Long tradeId);
-	public Integer updateTrades(Trades trades);
+	public boolean deleteTradesByTradeId(Trades delTrade);
+	public boolean updateTrades(Trades trades);
 
 }
