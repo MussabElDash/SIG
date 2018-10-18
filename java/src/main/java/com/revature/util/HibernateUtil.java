@@ -7,6 +7,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import com.revature.beans.Account;
+import com.revature.beans.AssetPricing;
+import com.revature.beans.Trades;
 import com.revature.beans.User;
 
 /*
@@ -25,6 +27,8 @@ public class HibernateUtil {
 		// ADDing The Mapping Here
 		configuration.addAnnotatedClass(Account.class);
 		configuration.addAnnotatedClass(User.class);
+		configuration.addAnnotatedClass(Trades.class);
+		configuration.addAnnotatedClass(AssetPricing.class);
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
 		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
