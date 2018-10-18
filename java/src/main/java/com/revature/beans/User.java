@@ -35,22 +35,22 @@ public class User {
 	private String state;
 	
 	@Column(name="zip")
-	private int zip;
+	private Long zip;
 	
 	@Column(name="ssn")
-	private int ssn;
+	private Long ssn;
 	
 	@Column(name="dob")
 	private Date dateOfBirth;
 	
 	@Column(name="phone")
-	private int phone;
+	private Long phone;
 	
 	@Column(name="approval_flag")
-	private int approvalFlag;
+	private Long approvalFlag;
 	
 	public User(String username, String pass, String fname, String lname, String address, String city, String state,
-			int zip, int ssn, Date dateOfBirth, int phone, int approvalFlag) {
+			long zip, long ssn, Date dateOfBirth, long phone, long approvalFlag) {
 		super();
 		this.username = username;
 		this.pass = pass;
@@ -133,19 +133,19 @@ public class User {
 		this.state = state;
 	}
 
-	public int getZip() {
+	public long getZip() {
 		return zip;
 	}
 
-	public void setZip(int zip) {
+	public void setZip(long zip) {
 		this.zip = zip;
 	}
 
-	public int getSsn() {
+	public long getSsn() {
 		return ssn;
 	}
 
-	public void setSsn(int ssn) {
+	public void setSsn(long ssn) {
 		this.ssn = ssn;
 	}
 
@@ -157,19 +157,19 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public int getPhone() {
+	public long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 
-	public int getApprovalFlag() {
+	public long getApprovalFlag() {
 		return approvalFlag;
 	}
 
-	public void setApprovalFlag(int approvalFlag) {
+	public void setApprovalFlag(long approvalFlag) {
 		this.approvalFlag = approvalFlag;
 	}
 	
