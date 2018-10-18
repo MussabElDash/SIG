@@ -19,7 +19,7 @@ public class AssetPricing {
 	private String tickerSymbol;
 	
 	@Column (name="price")
-	private Number price;
+	private Double price;
 	
 	public String getTickerSymbol() {
 		return tickerSymbol;
@@ -27,22 +27,22 @@ public class AssetPricing {
 	public void setTickerSymbol(String tickerSymbol) {
 		this.tickerSymbol = tickerSymbol;
 	}
-	public Number getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(Number price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	@Override
 	public String toString() {
 		return "AssetPricing [tickerSymbol=" + tickerSymbol + ", price=" + price + "]";
 	}
-	public AssetPricing(String tickerSymbol, Number price) {
+	public AssetPricing(String tickerSymbol, Double price) {
 		super();
 		this.tickerSymbol = tickerSymbol;
 		this.price = price;
 	}
-	public AssetPricing(Number price) {
+	public AssetPricing(Double price) {
 		super();
 		this.price = price;
 	}

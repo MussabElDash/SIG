@@ -1,8 +1,9 @@
-package com.revature.daos;
+package com.revature.dao;
 
 import java.util.List;
 
 import com.revature.beans.Trades;
+import com.revature.beans.User;
 
 public interface TradesDao {
 	

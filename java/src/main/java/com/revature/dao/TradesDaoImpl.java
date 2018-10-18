@@ -1,4 +1,4 @@
-package com.revature.daos;
+package com.revature.dao;
 
 import java.util.List;
 
@@ -8,8 +8,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.revature.beans.Trades;
+import com.revature.beans.User;
 
-import net.sf.ehcache.hibernate.HibernateUtil;
+import com.revature.util.HibernateUtil;
 
 public class TradesDaoImpl implements TradesDao {
 
@@ -44,7 +45,7 @@ public class TradesDaoImpl implements TradesDao {
 
 		} catch (HibernateException e) {
 			e.printStackTrace();
-
+			
 		} finally {
 			session.close();
 		}
@@ -85,7 +86,7 @@ public class TradesDaoImpl implements TradesDao {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
-			session.clear();
+			session.close();
 		}
 		return alltradeslist;
 	}
