@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.revature.beans.Account;
 import com.revature.beans.Order;
 import com.revature.util.HibernateUtil;
 
@@ -33,7 +34,7 @@ public class OrderDaoImpl  implements OrderDao{
 	}
 
 	@Override
-	public List<Order> getAllSecurities() {
+	public List<Order> getAllOrders() {
 		List<Order> orders = null;
 		Session session = HibernateUtil.getSession();
 		
@@ -110,6 +111,29 @@ public class OrderDaoImpl  implements OrderDao{
 			session.close();
 		}
 		
+	}
+
+	@Override
+	public List<Order> getOrdersByAccount(Account acct) {
+		List<Order> orders = null;
+		Session session = HibernateUtil.getSession();
+		
+		try {
+			
+			Query query = session.createQuery("FROM Security WHERE OwnerAccount = :givenAcct");
+			query.setParameter("givenAcct", acct);
+			
+			orders = query.list();
+			
+			
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+			
+		}
+		
+		return orders;
 	}
 
 }

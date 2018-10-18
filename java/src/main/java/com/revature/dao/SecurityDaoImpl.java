@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.revature.beans.Account;
 import com.revature.beans.Security;
 import com.revature.util.HibernateUtil;
 
@@ -132,6 +133,8 @@ public class SecurityDaoImpl implements SecurityDao{
 			session.close();
 			
 		}
+		
+		return securities;
 	}
 
 }
