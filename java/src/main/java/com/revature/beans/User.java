@@ -2,19 +2,51 @@ package com.revature.beans;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="users")
 public class User {
 	
+	@Id
+	@Column(name="username")
 	private String username;
+	
+	@Column(name="pass")
 	private String pass;
+	
+	@Column(name="fname")
 	private String fname;
+	
+	@Column(name="lname")
 	private String lname;
+	
+	@Column(name="address")
 	private String address;
+	
+	@Column(name="city")
 	private String city;
+	
+	@Column(name="state")
 	private String state;
+	
+	@Column(name="zip")
 	private int zip;
+	
+	@Column(name="ssn")
 	private int ssn;
+	
+	@Column(name="dob")
 	private Date dateOfBirth;
+	
+	@Column(name="phone")
 	private int phone;
+	
+	@Column(name="approval_flag")
 	private int approvalFlag;
 	
 	public User(String username, String pass, String fname, String lname, String address, String city, String state,

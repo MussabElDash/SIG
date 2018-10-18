@@ -1,15 +1,31 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="accounts")
 public class Account {
 
+	@Id
+	@Column(name="account_id")
 	private int id;
+	
+	@Column(name="account_type")
 	private String accountType;
+	
+	@Column(name="account_name")
 	private String accountName;
+	
+	@Column(name="balance")
 	private double balance;
 	
-	//TODO: The Hibernate annotation here
-	// will map the Many to One relationship
-	// that has been established in the DB
+	@ManyToOne
+	@JoinColumn(name="username")
 	private User owner;
 
 	public Account(int id, String accountType, String accountName, double balance, User owner) {

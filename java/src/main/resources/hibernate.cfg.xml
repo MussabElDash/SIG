@@ -63,6 +63,8 @@
 		<mapping class="com.revature.beans.TaskStatus"/>
 
 		<mapping class="com.revature.beans.Rank" />
+		
+		<mapping class="com.revature.beans.User"/>
 
 
 	</session-factory>
