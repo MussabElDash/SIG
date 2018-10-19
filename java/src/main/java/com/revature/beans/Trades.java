@@ -22,11 +22,13 @@ public class Trades {
 	@GeneratedValue(generator="trade_seq", strategy = GenerationType.SEQUENCE)
 	private Long tradeId;
 	
+	@ManyToOne
 	@Column (name="requestor_username")
-	private String requestorUsername;
+	private User requestor;
 	
+	@ManyToOne
 	@Column (name="receiver_username")
-	private String receiverUsername;
+	private User receiver;
 	
 	@Column (name="broker_status")
 	private Long brokerStatus;
@@ -49,27 +51,24 @@ public class Trades {
 	@Column (name="created_on")
 	private Date createdOn;
 	
-	@ManyToOne
-	@JoinColumn(name="username")
-	private User u;
-	
 	public Long getTradeId() {
 		return tradeId;
 	}
 	public void setTradeId(Long tradeId) {
 		this.tradeId = tradeId;
 	}
-	public String getRequestorUsername() {
-		return requestorUsername;
+	
+	public User getRequestor() {
+		return requestor;
 	}
-	public void setRequestorUsername(String requestorUsername) {
-		this.requestorUsername = requestorUsername;
+	public void setRequestor(User requestor) {
+		this.requestor = requestor;
 	}
-	public String getReceiverUsername() {
-		return receiverUsername;
+	public User getReceiver() {
+		return receiver;
 	}
-	public void setReceiverUsername(String receiverUsername) {
-		this.receiverUsername = receiverUsername;
+	public void setReceiver(User receiver) {
+		this.receiver = receiver;
 	}
 	public Long getBrokerStatus() {
 		return brokerStatus;
@@ -113,28 +112,22 @@ public class Trades {
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
-	public User getU() {
-		return u;
-	}
-	public void setU(User u) {
-		this.u = u;
-	}
 	
 	@Override
 	public String toString() {
-		return "Trades [tradeId=" + tradeId + ", requestorUsername=" + requestorUsername + ", receiverUsername="
-				+ receiverUsername + ", brokerStatus=" + brokerStatus + ", receiverApproval=" + receiverApproval
-				+ ", securityIdRequestor=" + securityIdRequestor + ", secutiyIdReceiver=" + secutiyIdReceiver
-				+ ", amountRequestor=" + amountRequestor + ", amountReceiver=" + amountReceiver + ", createdOn="
-				+ createdOn + "]";
+		return "Trades [tradeId=" + tradeId + ", requestor=" + requestor + ", receiver=" + receiver + ", brokerStatus="
+				+ brokerStatus + ", receiverApproval=" + receiverApproval + ", securityIdRequestor="
+				+ securityIdRequestor + ", secutiyIdReceiver=" + secutiyIdReceiver + ", amountRequestor="
+				+ amountRequestor + ", amountReceiver=" + amountReceiver + ", createdOn=" + createdOn + "]";
 	}
-	public Trades(Long tradeId, String requestorUsername, String receiverUsername, Long brokerStatus,
-			Long receiverApproval, Long securityIdRequestor, Long secutiyIdReceiver, Long amountRequestor,
-			Long amountReceiver, Date createdOn, User u) {
+	
+	public Trades(Long tradeId, User requestor, User receiver, Long brokerStatus, Long receiverApproval,
+			Long securityIdRequestor, Long secutiyIdReceiver, Long amountRequestor, Long amountReceiver,
+			Date createdOn) {
 		super();
 		this.tradeId = tradeId;
-		this.requestorUsername = requestorUsername;
-		this.receiverUsername = receiverUsername;
+		this.requestor = requestor;
+		this.receiver = receiver;
 		this.brokerStatus = brokerStatus;
 		this.receiverApproval = receiverApproval;
 		this.securityIdRequestor = securityIdRequestor;
@@ -142,14 +135,13 @@ public class Trades {
 		this.amountRequestor = amountRequestor;
 		this.amountReceiver = amountReceiver;
 		this.createdOn = createdOn;
-		this.u = u;
 	}
-	public Trades(String requestorUsername, String receiverUsername, Long brokerStatus, Long receiverApproval,
-			Long securityIdRequestor, Long secutiyIdReceiver, Long amountRequestor, Long amountReceiver, Date createdOn,
-			User u) {
+	
+	public Trades(User requestor, User receiver, Long brokerStatus, Long receiverApproval, Long securityIdRequestor,
+			Long secutiyIdReceiver, Long amountRequestor, Long amountReceiver, Date createdOn) {
 		super();
-		this.requestorUsername = requestorUsername;
-		this.receiverUsername = receiverUsername;
+		this.requestor = requestor;
+		this.receiver = receiver;
 		this.brokerStatus = brokerStatus;
 		this.receiverApproval = receiverApproval;
 		this.securityIdRequestor = securityIdRequestor;
@@ -157,7 +149,6 @@ public class Trades {
 		this.amountRequestor = amountRequestor;
 		this.amountReceiver = amountReceiver;
 		this.createdOn = createdOn;
-		this.u = u;
 	}
 	public Trades() {
 		super();
