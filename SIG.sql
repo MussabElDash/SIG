@@ -51,6 +51,9 @@ CREATE TABLE orders(
    CONSTRAINT account_id_fk FOREIGN KEY (account_id)
        REFERENCES accounts (account_id) ON DELETE CASCADE
 
+   CONSTRAINT ticker_symbol_order_fk FOREIGN KEY (ticker_symbol)
+       REFERENCES asset_pricing (ticker_symbol) ON DELETE CASCADE
+
 );
 
 CREATE TABLE securities(
@@ -65,6 +68,9 @@ CREATE TABLE securities(
 
    CONSTRAINT account_id2_fk FOREIGN KEY (account_id)
        REFERENCES accounts (account_id) ON DELETE CASCADE
+
+   CONSTRAINT ticker_symbol_sec_fk FOREIGN KEY (ticker_symbol)
+       REFERENCES ass_pricing (ticker_symbol) ON DELETE CASCADE
 
 );
 
