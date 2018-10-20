@@ -11,20 +11,20 @@ import com.revature.beans.AssetPricing;
 import com.revature.util.HibernateUtil;
 
 public class AssetPricingDaoImpl implements AssetPricingDao {
-	
+
 	/*
-	 * 	public void insertAssetPricing (AssetPricing assetPricing);
-	public AssetPricing selectAssetPricingByTickerSymbol(String tickerSymbol);
-	public List<AssetPricing> selectAllTrades();
-	public Integer deleteAssetPricingByTickerSymbol(String tickerSymbol);
-	public Integer updateAssetPricing(AssetPricing assetPricing);
+	 * public void insertAssetPricing (AssetPricing assetPricing); public
+	 * AssetPricing selectAssetPricingByTickerSymbol(String tickerSymbol); public
+	 * List<AssetPricing> selectAllTrades(); public Integer
+	 * deleteAssetPricingByTickerSymbol(String tickerSymbol); public Integer
+	 * updateAssetPricing(AssetPricing assetPricing);
 	 */
-	
-	public long insertAssetPricing (AssetPricing assetPricing) {
+
+	public long insertAssetPricing(AssetPricing assetPricing) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		Long id = null;
-		
+
 		try {
 			tx = session.beginTransaction();
 			id = (Long) session.save(assetPricing);
@@ -35,38 +35,39 @@ public class AssetPricingDaoImpl implements AssetPricingDao {
 		} finally {
 			session.close();
 		}
-		
+
 		return id;
 	}
-	
+
 	public AssetPricing selectAssetPricingByTickerSymbol(String tickerSymbol) {
 		Session session = HibernateUtil.getSession();
 		AssetPricing assetPricing = null;
-		
+
 		try {
 			Query query = session.createQuery("FROM AssetPricing WHERE tickerSymbol =:givenTickerSymbol");
 			query.setParameter("givenTickerSymbol", tickerSymbol);
 			assetPricing = (AssetPricing) query.uniqueResult();
-		
+
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			
+
 		} finally {
 			session.close();
 		}
-		
+
 		return assetPricing;
-		
+
 	}
-	
-	public List<AssetPricing> selectAllTrades() {
+
+	@SuppressWarnings("unchecked")
+	public List<AssetPricing> selectAllAssetPricings() {
 		Session session = HibernateUtil.getSession();
 		List<AssetPricing> allAssetsPricingList = null;
-		
+
 		try {
 			Query query = session.createQuery("FROM AssetPricing");
 			allAssetsPricingList = query.list();
-			
+
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -74,11 +75,11 @@ public class AssetPricingDaoImpl implements AssetPricingDao {
 		}
 		return allAssetsPricingList;
 	}
-	
+
 	public boolean deleteAssetPricingByTickerSymbol(String tickerSymbol) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		
+
 		try {
 			tx = session.beginTransaction();
 			session.delete(tickerSymbol);
@@ -92,11 +93,11 @@ public class AssetPricingDaoImpl implements AssetPricingDao {
 			session.close();
 		}
 	}
-	
+
 	public boolean updateAssetPricing(AssetPricing assetPricing) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		
+
 		try {
 			tx = session.beginTransaction();
 			session.update(assetPricing);
@@ -110,33 +111,5 @@ public class AssetPricingDaoImpl implements AssetPricingDao {
 			session.close();
 		}
 	}
-		
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

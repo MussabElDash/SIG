@@ -45,6 +45,14 @@ public class AssetPricing {
 		this.price = price;
 	}
 
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	@Override
 	public String toString() {
 		return "AssetPricing [tickerSymbol=" + tickerSymbol + ", price=" + price + "]";
@@ -54,11 +62,6 @@ public class AssetPricing {
 		super();
 		this.tickerSymbol = tickerSymbol;
 		this.companyName = companyName;
-		this.price = price;
-	}
-
-	public AssetPricing(Double price) {
-		super();
 		this.price = price;
 	}
 
