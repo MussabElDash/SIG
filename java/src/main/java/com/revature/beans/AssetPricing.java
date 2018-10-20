@@ -8,8 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 @Table(name = "asset_pricing")
+@Check(constraints = "price >= 0")
 public class AssetPricing {
 
 	@Id
@@ -22,6 +26,7 @@ public class AssetPricing {
 	private String companyName;
 
 	@Column(name = "price")
+	@ColumnDefault(value = "0")
 	private Double price;
 
 	public String getTickerSymbol() {

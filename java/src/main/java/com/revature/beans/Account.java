@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,13 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.revature.beans.User;
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "accounts")
+// TODO ADD account types in here
+@Check(constraints = "account_type IN ('type1', 'type2', 'type3')")
 public class Account {
 
 	@Id
@@ -22,18 +28,25 @@ public class Account {
 	@GeneratedValue(generator = "acc_seq", strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	@Column(name = "account_type")
+	@Column(name = "account_type", nullable = false)
 	private String accountType;
 
 	@Column(name = "account_name")
 	private String accountName;
 
 	@Column(name = "balance")
+	@ColumnDefault(value = "0")
 	private Double balance;
 
 	@ManyToOne
-	@JoinColumn(name = "username")
+	@JoinColumn(name = "username", nullable = false)
 	private User owner;
+
+	@OneToMany(mappedBy = "ownerAccount")
+	private Set<Order> orders;
+
+	@OneToMany(mappedBy = "ownerAccount")
+	private Set<Security> securities;
 
 	public Account(long id, String accountType, String accountName, double balance, User owner) {
 		super();
@@ -92,6 +105,14 @@ public class Account {
 
 	public void setOwner(User owner) {
 		this.owner = owner;
+	}
+
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public Set<Security> getSecurities() {
+		return securities;
 	}
 
 }
