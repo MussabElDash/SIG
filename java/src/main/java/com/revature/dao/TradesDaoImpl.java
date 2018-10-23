@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.revature.beans.Account;
 import com.revature.beans.Trades;
 import com.revature.beans.User;
 
@@ -53,8 +54,9 @@ public class TradesDaoImpl implements TradesDao {
 		return trades;
 
 	}
-
-
+	
+	
+	
 	@Override
 	public List<Trades> selectTradesByUser(User user) {
 		Session session = HibernateUtil.getSession();
@@ -128,6 +130,22 @@ public class TradesDaoImpl implements TradesDao {
 		} finally {
 			session.close();
 		}
+	}
+
+	@Override
+	public List<Trades> selectTradesByAccount(Account a) {
+		
+		List<Trades> trades = null;
+		Session session = HibernateUtil.getSession();
+		
+		try {
+			Query query = session.createQuery("FROM Trades");
+		} catch (HibernateException e) {
+			// TODO: handle exception
+		}
+		
+		return trades;
+		
 	}
 
 }
