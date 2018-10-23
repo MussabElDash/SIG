@@ -27,12 +27,12 @@ public class Trade {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "requester_username", nullable = false)
-	private User requester;
+	@JoinColumn(name = "requester_account_id", nullable = false)
+	private Account requesterAccount;
 
 	@ManyToOne
-	@JoinColumn(name = "receiver_username")
-	private User receiver;
+	@JoinColumn(name = "receiver_account_id")
+	private Account receiverAccount;
 
 	@Column(name = "broker_status")
 	private Integer brokerStatus;
@@ -66,20 +66,20 @@ public class Trade {
 		this.id = id;
 	}
 
-	public User getrequester() {
-		return requester;
+	public Account getrequesterAccount() {
+		return requesterAccount;
 	}
 
-	public void setrequester(User requester) {
-		this.requester = requester;
+	public void setrequesterAccount(Account requesterAccount) {
+		this.requesterAccount = requesterAccount;
 	}
 
-	public User getReceiver() {
-		return receiver;
+	public Account getReceiverAccount() {
+		return receiverAccount;
 	}
 
-	public void setReceiver(User receiver) {
-		this.receiver = receiver;
+	public void setReceiveraccount(Account receiverAccount) {
+		this.receiverAccount = receiverAccount;
 	}
 
 	public Integer getBrokerStatus() {
@@ -124,19 +124,19 @@ public class Trade {
 
 	@Override
 	public String toString() {
-		return "Trade [id=" + id + ", requester=" + requester + ", receiver=" + receiver + ", brokerStatus="
-				+ brokerStatus + ", receiverApproval=" + receiverApproval + ", requesterSecurity=" + requesterSecurity
-				+ ", receiverSecutiy=" + receiverSecutiy + ", amountrequester=" + amountrequester + ", amountReceiver="
-				+ amountReceiver + ", createdOn=" + createdOn + "]";
+		return "Trade [id=" + id + ", requesterAccount=" + requesterAccount + ", receiverAccount=" + receiverAccount
+				+ ", brokerStatus=" + brokerStatus + ", receiverApproval=" + receiverApproval + ", requesterSecurity="
+				+ requesterSecurity + ", receiverSecutiy=" + receiverSecutiy + ", amountrequester=" + amountrequester
+				+ ", amountReceiver=" + amountReceiver + ", createdOn=" + createdOn + "]";
 	}
 
-	public Trade(Long id, User requester, User receiver, Integer brokerStatus, Integer receiverApproval,
+	public Trade(Long id, Account requesterAccount, Account receiverAccount, Integer brokerStatus, Integer receiverApproval,
 			Security requesterSecurity, Security receiverSecutiy, Integer amountrequester, Integer amountReceiver,
 			Date createdOn) {
 		super();
 		this.id = id;
-		this.requester = requester;
-		this.receiver = receiver;
+		this.requesterAccount = requesterAccount;
+		this.receiverAccount = receiverAccount;
 		this.brokerStatus = brokerStatus;
 		this.receiverApproval = receiverApproval;
 		this.requesterSecurity = requesterSecurity;

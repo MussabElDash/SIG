@@ -48,9 +48,9 @@ CREATE TABLE orders(
     amount NUMBER(38) DEFAULT 0,
     broker_status VARCHAR2(1) DEFAULT 0,
     CONSTRAINT order_id_pk PRIMARY KEY (order_id),
-    CONSTRAINT account_id_fk FOREIGN KEY (account_id) 
+    CONSTRAINT account_id_fk FOREIGN KEY (account_id)
         REFERENCES accounts (account_id) ON DELETE CASCADE,
-    CONSTRAINT ticker_symbol_order_fk FOREIGN KEY (ticker_symbol) 
+    CONSTRAINT ticker_symbol_order_fk FOREIGN KEY (ticker_symbol)
         REFERENCES asset_pricing (ticker_symbol) ON DELETE CASCADE,
     CONSTRAINT orders_chk CHECK (amount >= 0 AND broker_status IN (-1, 0, 1))
 );
@@ -63,9 +63,9 @@ CREATE TABLE securities(
     amount NUMBER(38) DEFAULT 0,
     account_id NUMBER(38) NOT NULL,
     CONSTRAINT security_id_pk PRIMARY KEY (security_id),
-    CONSTRAINT account_id2_fk FOREIGN KEY (account_id) 
+    CONSTRAINT account_id2_fk FOREIGN KEY (account_id)
         REFERENCES accounts (account_id) ON DELETE CASCADE,
-    CONSTRAINT ticker_symbol_sec_fk FOREIGN KEY (ticker_symbol) 
+    CONSTRAINT ticker_symbol_sec_fk FOREIGN KEY (ticker_symbol)
         REFERENCES asset_pricing (ticker_symbol) ON DELETE CASCADE,
     CONSTRAINT securities_amount_chk CHECK(amount >= 0),
     CONSTRAINT securities_type_chk CHECK(security_type IN ('type1', 'type2', 'type3'))
@@ -73,8 +73,8 @@ CREATE TABLE securities(
 
 CREATE TABLE trades (
     trade_id NUMBER(38),
-    requester_username VARCHAR2 (100) NOT NULL,
-    receiver_username VARCHAR2 (100),
+    requester_account_id VARCHAR2 (100) NOT NULL,
+    receiver_account_id VARCHAR2 (100),
     broker_status NUMBER (1) DEFAULT 0,
     receiver_approval NUMBER (1) DEFAULT 0,
     security_id_requester NUMBER (38) NOT NULL,
@@ -82,13 +82,13 @@ CREATE TABLE trades (
     amount_requester NUMBER (10) NOT NULL,
     amount_receiver NUMBER (10),
     CONSTRAINT trade_id_pk PRIMARY KEY (trade_id ),
-    CONSTRAINT requester_username_fk FOREIGN KEY ( requester_username ) 
-        REFERENCES users ( username ) ON DELETE CASCADE,
-    CONSTRAINT receiver_username_fk FOREIGN KEY ( receiver_username ) 
-        REFERENCES users ( username )ON DELETE CASCADE,
-    CONSTRAINT security_id_requester_fk FOREIGN KEY ( security_id_requester ) 
+    CONSTRAINT requester_account_id_fk FOREIGN KEY ( requester_account_id )
+        REFERENCES accounts ( account_id ) ON DELETE CASCADE,
+    CONSTRAINT receiver_account_id_fk FOREIGN KEY ( receiver_account_id )
+        REFERENCES accounts ( account_id )ON DELETE CASCADE,
+    CONSTRAINT security_id_requester_fk FOREIGN KEY ( security_id_requester )
         REFERENCES securities ( security_id ) ON DELETE CASCADE,
-    CONSTRAINT security_id_receiver_fk FOREIGN KEY ( security_id_receiver ) 
+    CONSTRAINT security_id_receiver_fk FOREIGN KEY ( security_id_receiver )
         REFERENCES securities ( security_id ),
     CONSTRAINT trades_chk CHECK (broker_status IN (-1, 0, 1)
         AND receiver_approval IN (-1, 0, 1) AND amount_requester >= 0)
@@ -101,3 +101,4 @@ prompt "Start of control"
 prompt "End of control"
 /
 SET DEFINE ON
+commit;
