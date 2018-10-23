@@ -38,11 +38,11 @@ public class RegisterationServlet extends HttpServlet {
 		u.setAddress(request.getParameter("address"));
 		u.setCity(request.getParameter("city"));
 		u.setState(request.getParameter("state"));
-		u.setZip(Long.parseLong(request.getParameter("zip")));
-		u.setSsn(Long.parseLong(request.getParameter("ssn")));
+		u.setZip(Integer.parseInt(request.getParameter("zip")));
+		u.setSsn(Integer.parseInt(request.getParameter("ssn")));
 		Date dob = Date.valueOf(request.getParameter("dob"));
 		u.setDateOfBirth(dob);
-		u.setPhone(Long.parseLong(request.getParameter("phone")));
+		u.setPhone(Integer.parseInt(request.getParameter("phone")));
 		u.setApprovalFlag(0);
 		
 		if(udao.addUser(u)) {

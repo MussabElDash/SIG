@@ -11,49 +11,55 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.beans.Account;
+import com.revature.beans.Security;
 import com.revature.beans.User;
 import com.revature.dao.AccountDAO;
 import com.revature.dao.AccountDAOImpl;
+import com.revature.dao.SecurityDao;
+import com.revature.dao.SecurityDaoImpl;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 import com.revature.util.JsonUtil;
 import com.revature.util.LogInterface;
 
 /**
- * Servlet implementation class GetUserAccountsServlet
+ * Servlet implementation class GetAccountTotalsServlet
  */
-public class GetUserAccountsServlet extends HttpServlet {
+public class GetAccountTotalsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		Logger log = LogInterface.logger;
 		
 		UserDAO udao = new UserDAOImpl();
 		AccountDAO adao = new AccountDAOImpl();
-		User u = udao.getUser(request.getParameter("username"));
-		ArrayList<Account> userAccounts = (ArrayList<Account>)adao.getAccountsByUser(u);
+		SecurityDao sdao = new SecurityDaoImpl();
 		
-		String JSONaccountList = JsonUtil.convertJavaToJson(userAccounts);
+		User u = (User)request.getSession().getAttribute("user");
+		ArrayList<Account> pa = (ArrayList<Account>)adao.getAccountsByUser(u);
+		ArrayList<Security> as = null;
+		double total = 0.0;
+		
+		for(Account a : pa) {
+			as = (ArrayList<Security>)sdao.getSecuritiesByAccount(a);
+			if(as != null) {
+				for(Security s : as) {
+					
+					total += s.getAmount();
+					
+				}
+			}
+		}
+		
+		Double amount = total;
+		
+		String JSONtotalOfAccounts = JsonUtil.convertJavaToJson(amount);
 		response.setContentType("application/json");
-		response.getWriter().write(JSONaccountList);
-		
-		if(userAccounts != null) {
-			log.info("User [ " + u.getUsername() + " ] accessing a list of all of their accounts.");
-		}
-		else {
-			log.error("User [ " + u.getUsername() + " ] attempted and failed to retrieve a list of all of their accounts.");
-		}
+		response.getWriter().write(JSONtotalOfAccounts);
 		
 	}
 

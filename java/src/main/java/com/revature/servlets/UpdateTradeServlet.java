@@ -10,15 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.Logger;
 
-import com.revature.beans.Security;
-import com.revature.beans.Trades;
-import com.revature.beans.User;
-import com.revature.dao.SecurityDao;
-import com.revature.dao.SecurityDaoImpl;
+import com.revature.beans.Trade;
 import com.revature.dao.TradesDao;
 import com.revature.dao.TradesDaoImpl;
-import com.revature.dao.UserDAO;
-import com.revature.dao.UserDAOImpl;
 import com.revature.util.LogInterface;
 
 /**
@@ -35,18 +29,17 @@ public class UpdateTradeServlet extends HttpServlet {
 		Logger log = LogInterface.logger;
 		
 		TradesDao tdao = new TradesDaoImpl();
-		Trades t = tdao.selectTradesByTradeId(Long.parseLong(request.getParameter("tid")));
-		SecurityDao sdao = new SecurityDaoImpl();
+		Trade t = tdao.selectTradesByTradeId(Long.parseLong(request.getParameter("tid")));
 		
-		t.setAmountRequestor(Long.parseLong(request.getParameter("requestAmount")));
-		t.setAmountReceiver(Long.parseLong(request.getParameter("recieveAmount")));
+		t.setAmountrequester(Integer.parseInt(request.getParameter("requestAmount")));
+		t.setAmountReceiver(Integer.parseInt(request.getParameter("recieveAmount")));
 		
 		if(tdao.updateTrades(t)) {
-			log.info("Trade [ Trade ID: " + t.getTradeId() + " ] succesffully updated.");
+			log.info("Trade [ Trade ID: " + t.getId() + " ] succesffully updated.");
 			log.info("\tTrade information: " + t.toString());
 		}
 		else {
-			log.error("Trade [ Trade ID: " + t.getTradeId() + " ] FAILED to update.");
+			log.error("Trade [ Trade ID: " + t.getId() + " ] FAILED to update.");
 		}
 		
 	}

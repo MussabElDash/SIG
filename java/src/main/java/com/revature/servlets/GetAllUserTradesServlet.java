@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.Logger;
 
-import com.revature.beans.Trades;
+import com.revature.beans.Trade;
 import com.revature.beans.User;
 import com.revature.dao.TradesDao;
 import com.revature.dao.TradesDaoImpl;
@@ -37,12 +37,12 @@ public class GetAllUserTradesServlet extends HttpServlet {
 
 		Logger log = LogInterface.logger;
 		
-		User u = (User)request.getSession().getAttribute("user");
-		ArrayList<Trades> tradeList = null;
+		User u = (User)request.getSession().getAttribute("user"); //TODO figure out how the username is passed from Angular.
+		ArrayList<Trade> tradeList = null;
 		
 		TradesDao tdao = new TradesDaoImpl();
-		
-		tradeList = (ArrayList<Trades>)tdao.selectTradesByUser(u);
+	
+		tradeList = null; //(ArrayList<Trade>)tdao.selectTradesByUser(u);
 		
 		String JSONtradeList = JsonUtil.convertJavaToJson(tradeList);
 		response.setContentType("application/json");

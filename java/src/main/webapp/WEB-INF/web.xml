@@ -119,4 +119,34 @@
     <servlet-name>GetUserAccountsServlet</servlet-name>
     <url-pattern>/GetUserAccountsServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetTradeByRequestor</display-name>
+    <servlet-name>GetTradeByRequestor</servlet-name>
+    <servlet-class>com.revature.servlets.GetTradeByRequestor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetTradeByRequestor</servlet-name>
+    <url-pattern>/GetTradeByRequestor</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAccountTotalsServlet</display-name>
+    <servlet-name>GetAccountTotalsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetAccountTotalsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAccountTotalsServlet</servlet-name>
+    <url-pattern>/GetAccountTotalsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateAccountServlet</display-name>
+    <servlet-name>CreateAccountServlet</servlet-name>
+    <servlet-class>com.revature.servlets.CreateAccountServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateAccountServlet</servlet-name>
+    <url-pattern>/CreateAccountServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

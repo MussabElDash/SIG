@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.Logger;
 
-import com.revature.beans.Security;
-import com.revature.beans.Trades;
+import com.revature.beans.Account;
+import com.revature.beans.Trade;
 import com.revature.beans.User;
-import com.revature.dao.SecurityDao;
-import com.revature.dao.SecurityDaoImpl;
+import com.revature.dao.AccountDAO;
+import com.revature.dao.AccountDAOImpl;
 import com.revature.dao.TradesDao;
 import com.revature.dao.TradesDaoImpl;
 import com.revature.dao.UserDAO;
@@ -36,22 +36,20 @@ public class CreateTradeServlet extends HttpServlet {
 		
 		TradesDao tdao = new TradesDaoImpl();
 		UserDAO udao = new UserDAOImpl();
-		SecurityDao sdao = new SecurityDaoImpl();
-		Trades t = new Trades();
-		User requestor = (User)request.getSession().getAttribute("user");
+		AccountDAO adao = new AccountDAOImpl();
+		Trade t = new Trade();
+		User requestor = udao.getUser(request.getParameter("requestor"));
 		User reciever = udao.getUser(request.getParameter("reciever"));
-		Security requestorSecurity = sdao.selectSecurityById(Long.parseLong(request.getParameter("requestSecurity")));
-		Security recieverSecurity = sdao.selectSecurityById(Long.parseLong(request.getParameter("recieverSecurity")));
+		Account reqAcc = adao.getAccount(Long.parseLong(request.getParameter("reqaid")));
+		Account recAcc = adao.getAccount(Long.parseLong(request.getParameter("recaid")));
 		
-		t.setRequestorUsername(requestor.getUsername());
-		t.setReceiverUsername(reciever.getUsername());
-		t.setBrokerStatus(0l);
-		t.setReceiverApproval(0l);
-		t.setSecurityIdRequestor(requestorSecurity.getId());
-		t.setSecutiyIdReceiver(recieverSecurity.getId());
-		t.setAmountRequestor(Long.parseLong(request.getParameter("requestAmount")));
-		t.setAmountReceiver(Long.parseLong(request.getParameter("recieveAmount")));
+		t.setBrokerStatus(0);
+		t.setReceiverApproval(0);
+		t.setrequesterAccount(reqAcc);
+		t.setReceiveraccount(recAcc);
 		t.setCreatedOn(new Date(System.currentTimeMillis()));
+		t.setAmountrequester(Integer.parseInt(request.getParameter("requestorAmount")));
+		t.setAmountReceiver(Integer.parseInt(request.getParameter("recieverAmount")));
 		
 		long newid = tdao.insertTrades(t);
 		

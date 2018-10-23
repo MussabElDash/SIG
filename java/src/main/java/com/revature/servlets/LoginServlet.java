@@ -46,30 +46,8 @@ public class LoginServlet extends HttpServlet {
 		
 		if(u != null) {
 			if(u.getPass().equals(password)) {
-				
-				ArrayList<Account> personalAccounts = null;
-				AccountDAO adao = new AccountDAOImpl();
-				SecurityDao sdao = new SecurityDaoImpl();
-				personalAccounts = (ArrayList<Account>)adao.getAccountsByUser(u);
-				ArrayList<Security> accountSecurities = null;
-				
-				double total = 0.0;
-				
-				for(Account a : personalAccounts) {
-					accountSecurities = (ArrayList<Security>)sdao.getSecuritiesByAccount(a);
-					if(accountSecurities != null) {
-						for(Security s : accountSecurities) {
-							
-							total += s.getAmount();
-							
-						}
-					}
-				}
-				
 				log.info("User [ " + username + " ] SUCCESSFULLY logged in");
-				request.getSession().setAttribute("totalOfAccounts", total);
 				request.getSession().setAttribute("user", u);
-				request.getSession().setAttribute("accounts", personalAccounts);
 			}
 			else {
 				log.warn("User [ " + username + " ] failed to logged in...");
@@ -79,5 +57,4 @@ public class LoginServlet extends HttpServlet {
 			log.warn("User [ " + username + " ] failed to logged in...");
 		}
 	}
-
 }
