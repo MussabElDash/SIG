@@ -12,31 +12,37 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity 
-@Table(name="orders")
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.ColumnDefault;
+
+@Entity
+@Table(name = "orders")
+@Check(constraints = "amount >= 0 AND broker_status IN (-1, 0, 1)")
 public class Order {
-	
-	@Id //Marks as a primary key
-	@Column(name="order_id")
-	@SequenceGenerator(sequenceName="order_seq", name="order_seq")
-	@GeneratedValue(generator="order_seq", strategy = GenerationType.SEQUENCE)
+
+	@Id // Marks as a primary key
+	@Column(name = "order_id")
+	@SequenceGenerator(sequenceName = "order_seq", name = "order_seq")
+	@GeneratedValue(generator = "order_seq", strategy = GenerationType.SEQUENCE)
 	private Long id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="account_id")
+	@JoinColumn(name = "account_id", nullable = false)
 	private Account ownerAccount;
-	
+
 	@ManyToOne
-	@JoinColumn(name="ticker_symbol")
+	@JoinColumn(name = "ticker_symbol", nullable = false)
 	private AssetPricing ap;
-	
-	@Column(name="amount")
-	private Long amount;
-	
-	@Column(name="broker_status")
-	private String brokerStatus;
-	
-	@Column(name="created_on")
+
+	@Column(name = "amount")
+	@ColumnDefault(value = "0")
+	private Integer amount;
+
+	@Column(name = "broker_status")
+	@ColumnDefault(value = "0")
+	private Integer brokerStatus;
+
+	@Column(name = "created_on")
 	private Date createdOn;
 
 	public Long getId() {
@@ -63,19 +69,19 @@ public class Order {
 		this.ap = ap;
 	}
 
-	public Long getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 
-	public String getBrokerStatus() {
+	public Integer getBrokerStatus() {
 		return brokerStatus;
 	}
 
-	public void setBrokerStatus(String brokerStatus) {
+	public void setBrokerStatus(Integer brokerStatus) {
 		this.brokerStatus = brokerStatus;
 	}
 
@@ -92,8 +98,8 @@ public class Order {
 		return "Order [id=" + id + ", amount=" + amount + ", brokerStatus=" + brokerStatus + ", createdOn=" + createdOn
 				+ "]";
 	}
-	
-	public Order(Long id, Account ownerAccount, AssetPricing ap, Long amount, String brokerStatus, Date createdOn) {
+
+	public Order(Long id, Account ownerAccount, AssetPricing ap, Integer amount, Integer brokerStatus, Date createdOn) {
 		super();
 		this.id = id;
 		this.ownerAccount = ownerAccount;
@@ -107,6 +113,4 @@ public class Order {
 		super();
 	}
 
-	
-	
-}	
+}
