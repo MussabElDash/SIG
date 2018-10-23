@@ -1,4 +1,4 @@
-import { UserService } from './../user.service';
+import { AuthenticationService } from './../authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService) { }
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     this.loading = true;
-    this.userService.login(this.f.username.value, this.f.password.value) 
+    this.authenticationService.login(this.f.username.value, this.f.password.value) 
     .subscribe(
       data => {
           //Route to login page
