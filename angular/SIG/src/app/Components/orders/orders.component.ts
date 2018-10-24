@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NO_ERRORS_SCHEMA } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-orders',
