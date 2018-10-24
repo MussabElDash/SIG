@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.beans.Account;
+import com.revature.beans.AssetPricing;
 import com.revature.beans.Security;
 import com.revature.beans.User;
 import com.revature.dao.AccountDAO;
 import com.revature.dao.AccountDAOImpl;
+import com.revature.dao.AssetPricingDao;
+import com.revature.dao.AssetPricingDaoImpl;
 import com.revature.dao.SecurityDao;
 import com.revature.dao.SecurityDaoImpl;
 import com.revature.dao.UserDAO;
@@ -35,13 +38,13 @@ public class GetAccountTotalsServlet extends HttpServlet {
 		
 		Logger log = LogInterface.logger;
 		
-		UserDAO udao = new UserDAOImpl();
 		AccountDAO adao = new AccountDAOImpl();
 		SecurityDao sdao = new SecurityDaoImpl();
 		
-		User u = (User)request.getSession().getAttribute("user");
+		User u = (User)request.getSession().getAttribute("user"); //TODO: Session vars
 		ArrayList<Account> pa = (ArrayList<Account>)adao.getAccountsByUser(u);
 		ArrayList<Security> as = null;
+		AssetPricing ap = null;
 		double total = 0.0;
 		
 		for(Account a : pa) {
@@ -49,7 +52,8 @@ public class GetAccountTotalsServlet extends HttpServlet {
 			if(as != null) {
 				for(Security s : as) {
 					
-					total += s.getAmount();
+					ap = s.getAp();
+					total += (s.getAmount()*ap.getPrice());
 					
 				}
 			}
