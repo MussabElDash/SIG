@@ -41,6 +41,8 @@ public class LoginServlet extends HttpServlet {
 		
 		log.info("User [ " + username + " ] requesting login...");
 		
+		log.debug("Parameters are: {}", request.getParameterMap() );
+		
 		UserDAO udao = new UserDAOImpl();
 		u = udao.getUser(username);
 		
@@ -56,5 +58,7 @@ public class LoginServlet extends HttpServlet {
 		else {
 			log.warn("User [ " + username + " ] failed to logged in...");
 		}
+		
+		response.getWriter().println("garbage");
 	}
 }
