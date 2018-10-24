@@ -2,16 +2,18 @@ package com.revature.dao;
 
 import java.util.List;
 
-import com.revature.beans.Trades;
+import com.revature.beans.Account;
+import com.revature.beans.Trade;
 import com.revature.beans.User;
 
 public interface TradesDao {
 	
-	public long insertTrades (Trades trades);
-	public Trades selectTradesByTradeId(Long tradeId);
-	public List<Trades> selectTradesByUser(User user);
-	public List<Trades> selectAllTrades();
-	public boolean deleteTradesByTradeId(Trades delTrade);
-	public boolean updateTrades(Trades trades);
+	public long insertTrades (Trade trades);
+	public Trade selectTradesByTradeId(Long tradeId);
+	public List<Trade> selectAllTrades();
+	public List<Trade> selectTradesByRequestorAccount(Account a);
+	public List<Trade> selectTradesByReceiverAccount(Account a);
+	public boolean deleteTradesByTradeId(Trade delTrade);
+	public boolean updateTrades(Trade trades);
 
 }

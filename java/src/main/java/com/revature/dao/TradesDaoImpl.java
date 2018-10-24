@@ -7,14 +7,15 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.revature.beans.Trades;
+import com.revature.beans.Account;
+import com.revature.beans.Trade;
 import com.revature.beans.User;
 
 import com.revature.util.HibernateUtil;
 
 public class TradesDaoImpl implements TradesDao {
 
-	public long insertTrades(Trades trades) {
+	public long insertTrades(Trade trades) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		Long id = null;
@@ -34,14 +35,14 @@ public class TradesDaoImpl implements TradesDao {
 
 	}
 
-	public Trades selectTradesByTradeId(Long tradeId) {
+	public Trade selectTradesByTradeId(Long tradeId) {
 		Session session = HibernateUtil.getSession();
-		Trades trades = null;
+		Trade trades = null;
 
 		try {
-			Query query = session.createQuery("FROM Trades WHERE tradeId = :givenId");
+			Query query = session.createQuery("FROM Trade WHERE tradeId = :givenId");
 			query.setParameter("givenId", tradeId);
-			trades = (Trades) query.uniqueResult();
+			trades = (Trade) query.uniqueResult();
 
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -54,33 +55,13 @@ public class TradesDaoImpl implements TradesDao {
 
 	}
 
-
 	@Override
-	public List<Trades> selectTradesByUser(User user) {
+	public List<Trade> selectAllTrades() {
 		Session session = HibernateUtil.getSession();
-		List<Trades> usertradelist = null;
+		List<Trade> alltradeslist = null;
 		
 		try {
-			Query query = session.createQuery("FROM Trades WHERE user = :givenUser");
-			query.setParameter("givenUser", user);
-			usertradelist = query.list();
-			
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		
-		return usertradelist;
-	}
-
-	@Override
-	public List<Trades> selectAllTrades() {
-		Session session = HibernateUtil.getSession();
-		List<Trades> alltradeslist = null;
-		
-		try {
-			Query query = session.createQuery("FROM Trades");
+			Query query = session.createQuery("FROM Trade");
 			alltradeslist = query.list();
 			
 		} catch (HibernateException e) {
@@ -92,7 +73,7 @@ public class TradesDaoImpl implements TradesDao {
 	}
 
 	@Override
-	public boolean deleteTradesByTradeId(Trades delTrade) {
+	public boolean deleteTradesByTradeId(Trade delTrade) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		
@@ -112,7 +93,7 @@ public class TradesDaoImpl implements TradesDao {
 	}
 
 	@Override
-	public boolean updateTrades(Trades upTrade) {
+	public boolean updateTrades(Trade upTrade) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		
@@ -128,6 +109,46 @@ public class TradesDaoImpl implements TradesDao {
 		} finally {
 			session.close();
 		}
+	}
+
+	@Override
+	public List<Trade> selectTradesByRequestorAccount(Account a) {
+		
+		List<Trade> trades = null;
+		Session session = HibernateUtil.getSession();
+		
+		try {
+			Query query = session.createQuery("FROM Trade WHERE requesterAccount = :givenAccount");
+			query.setParameter("givenAccount", a);
+			trades = query.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		
+		return trades;
+		
+	}
+
+	@Override
+	public List<Trade> selectTradesByReceiverAccount(Account a) {
+		List<Trade> trades = null;
+		Session session = HibernateUtil.getSession();
+		
+		try {
+			Query query = session.createQuery("FROM Trade WHERE receiverAccount = :givenAccount");
+			query.setParameter("givenAccount", a);
+			trades = query.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		
+		return trades;
 	}
 
 }

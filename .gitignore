@@ -99,3 +99,4 @@ yarn-error.log
 Thumbs.db
 **/hibernate.cfg.xml
 **/pom.properties
+java/log
