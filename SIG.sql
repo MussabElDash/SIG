@@ -70,7 +70,7 @@ CREATE TABLE securities(
        REFERENCES accounts (account_id) ON DELETE CASCADE
 
    CONSTRAINT ticker_symbol_sec_fk FOREIGN KEY (ticker_symbol)
-       REFERENCES ass_pricing (ticker_symbol) ON DELETE CASCADE
+       REFERENCES asset_pricing (ticker_symbol) ON DELETE CASCADE
 
 );
 
