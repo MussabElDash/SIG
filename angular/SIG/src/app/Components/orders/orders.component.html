@@ -1,34 +1,56 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 <style>
   body {
-    background-color: rgb(235, 238, 243);
+  background-color: rgb(235, 238, 243);
   }
-  </style>
+</style>
 
-<div style="text-align: center;">
-  <div class=rsection>
-    <h1>Place an Order Below!</h1>
-  </div>
+<div class=rsection style="text-align: center;">
+  <h2>Place New Order</h2>
 </div>
 
-<div style="text-align: center;">
-  <select class="custom-select" name="type">
-    <option selected>Transaction Type</option>
-    <option value="1">Stocks/ETFs</option>
-    <option value="2">Mutual Funds</option>
-  </select>
+<div class="card text-center">
+    <h5 class="card-header">Brokerage ...7844</h5>
+    <div class="card-body">
+      <h6 class="card-title">Available Cash: $50,000,000.00</h6>
+    </div>
 </div>
 
-<div style="text-align: center;">
-  <div class="form-group col-md-6">
-    <label for="tickerSymbol">Symbol</label> <input type="text"
-      class="form-control" name="tickerSymbol" id="inputText"
-      placeholder="Ticker Symbol">
-  </div>
-</div>
 
-<div style="text-align: center;">
-  <input type="submit" 
-    value="Get Quote" />
-</div>
+<form style="text-align: center;">    
+    <div class="form-row">      
+      <div class="form-group col-md-4">
+        <label for="inputTransactionType">Transaction Type</label>
+        <select id="inputTransactionType" class="form-control">
+          <option selected>Stocks/ETFs</option>
+          <option>Mutual Funds</option>
+          <option>Bonds</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+          <label for="inputSymbol">Symbol</label>
+          <input type="text" class="form-control" id="inputSymbol">
+      </div>      
+    </div>    
+    <div class="card text-center">
+        <div class="card-header">
+          GOOG
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">1,103</h5>
+        </div>
+        <div class="card-footer text-muted">
+          Volume 2.00M
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Place Order</button>
+    <a href="#" class="btn btn-primary">Place Order</a>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
