@@ -12,6 +12,7 @@ import com.revature.beans.Order;
 import com.revature.beans.Security;
 import com.revature.beans.Trade;
 import com.revature.beans.User;
+import com.revature.dao.UserDAOImpl;
 
 /*
  * SessionFactory is configured as a singleton.
