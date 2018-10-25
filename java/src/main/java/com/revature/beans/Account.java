@@ -19,7 +19,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Entity
 @Table(name = "accounts")
 // TODO ADD account types in here
-@Check(constraints = "account_type IN ('type1', 'type2', 'type3')")
+@Check(constraints = "account_type IN ('Brokerage', 'IRA')")
 public class Account {
 
 	@Id
@@ -47,6 +47,12 @@ public class Account {
 
 	@OneToMany(mappedBy = "ownerAccount")
 	private Set<Security> securities;
+
+	@OneToMany(mappedBy = "requesterAccount")
+	private Set<Trade> requesterTrades;
+
+	@OneToMany(mappedBy = "receiverAccount")
+	private Set<Trade> receiverTrades;
 
 	public Account(long id, String accountType, String accountName, double balance, User owner) {
 		super();
@@ -113,6 +119,14 @@ public class Account {
 
 	public Set<Security> getSecurities() {
 		return securities;
+	}
+
+	public Set<Trade> getRequesterTrades() {
+		return requesterTrades;
+	}
+
+	public Set<Trade> getReceiverTrades() {
+		return receiverTrades;
 	}
 
 }

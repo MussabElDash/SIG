@@ -57,12 +57,6 @@ public class User {
 
 	@OneToMany(mappedBy = "owner")
 	private Set<Account> accounts;
-//
-//	@OneToMany(mappedBy = "requester")
-//	private Set<Trade> requesterTrades;
-//
-//	@OneToMany(mappedBy = "receiver")
-//	private Set<Trade> receiverTrades;
 
 	public User(String username, String pass, String fname, String lname, String address, String city, String state,
 			Integer zip, Integer ssn, Date dateOfBirth, Integer phone, Integer approvalFlag) {
@@ -191,13 +185,5 @@ public class User {
 	public Set<Account> getAccounts() {
 		return accounts;
 	}
-//
-//	public Set<Trade> getRequesterTrades() {
-//		return requesterTrades;
-//	}
-//
-//	public Set<Trade> getReceiverTrades() {
-//		return receiverTrades;
-//	}
 
 }

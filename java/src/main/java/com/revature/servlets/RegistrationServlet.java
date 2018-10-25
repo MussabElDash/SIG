@@ -18,7 +18,7 @@ import java.sql.Date;
 /**
  * Servlet implementation class RegisterationServlet
  */
-public class RegisterationServlet extends HttpServlet {
+public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**

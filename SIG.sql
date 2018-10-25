@@ -30,7 +30,7 @@ CREATE TABLE accounts (
     balance NUMBER(*,2) DEFAULT 0,
     CONSTRAINT account_pk PRIMARY KEY (account_id),
     CONSTRAINT account_user_fk FOREIGN KEY (username) REFERENCES users (username),
-    CONSTRAINT accounts_type_chk CHECK (account_type IN ('type1', 'type2', 'type3'))
+    CONSTRAINT accounts_type_chk CHECK (account_type IN ('Brokerage', 'IRA'))
 );
 
 CREATE TABLE asset_pricing(
@@ -68,7 +68,7 @@ CREATE TABLE securities(
     CONSTRAINT ticker_symbol_sec_fk FOREIGN KEY (ticker_symbol)
         REFERENCES asset_pricing (ticker_symbol) ON DELETE CASCADE,
     CONSTRAINT securities_amount_chk CHECK(amount >= 0),
-    CONSTRAINT securities_type_chk CHECK(security_type IN ('type1', 'type2', 'type3'))
+    CONSTRAINT securities_type_chk CHECK(security_type IN ('Stock', 'Dollar'))
 );
 
 CREATE TABLE trades (
