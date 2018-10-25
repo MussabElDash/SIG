@@ -1,3 +1,4 @@
+import { Account } from './../../_models/account';
 import { HttpHeaders } from '@angular/common/http';
 import { UserService } from './../../Services/user/user.service';
 import { Security } from './../../_models/security';
@@ -12,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountdetailComponent implements OnInit {
 
+  accounts:Account[] = [];
   securitys:Security[] = [];
   
 
@@ -24,7 +26,7 @@ export class AccountdetailComponent implements OnInit {
     .getAcctService()
     .subscribe( 
       data =>{
-        this.securitys = data;
+        this.accounts = data;
       }, 
       error=>{ console.log("woops")});
   }
