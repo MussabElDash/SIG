@@ -46,4 +46,9 @@ public class AuthenticationFilter implements Filter, LogInterface {
 		urls = fConfig.getInitParameter("ignorePatterns").split(",");
 	}
 
+	@Override
+	public void destroy() {
+		Filter.super.destroy();
+	}
+
 }

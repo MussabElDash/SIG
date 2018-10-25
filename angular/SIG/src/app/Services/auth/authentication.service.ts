@@ -1,43 +1,51 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+interface UserToken {
+	user: Object,
+	token: String,
+}
+
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(private http:HttpClient) { }
+	constructor(private http: HttpClient) { }
 
-  // httpOptions = {
-  //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  // };
+	httpOptions = {
+		headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
+		// withCredentials: true,
+	};
 
-  login(username:string, password:string){
+	login(username: string, password: string) {
 
-    let body = new HttpParams();
-    let headers = new HttpHeaders().set(
-      'Content-Type', 'application/x-www-form-urlencoded'
-    );
+		let body = new HttpParams();
+		// let headers = new HttpHeaders().set(
+		// 	'Content-Type', 'application/x-www-form-urlencoded'
+		// );
 
-    body = body.set('username', username);
-    body = body.set('password', password);
+		body = body.set('username', username);
+		body = body.set('password', password);
 
-    //Have response return user with username and jwt token
-    return this.http.post<any>('http://localhost:8085/SIG/LoginServlet', body)
-    .pipe(map(user => {
-        // login successful if there's a jwt token in the response
-        if (user) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-        }
+		//Have response return user with username and jwt token
+		return this.http.post<UserToken>('http://localhost:8085/SIG/LoginServlet', body, this.httpOptions)
+			.pipe(map(user => {
+				// login successful if there's a jwt token in the response
+				console.log(user.token);
+				console.log(user.user);
+				// if (user) {
+				// 	// store user details and jwt token in local storage to keep user logged in between page refreshes
+				// 	localStorage.setItem('currentUser', JSON.stringify(user));
+				// }
 
-        return user;
-    }));
-  }
+				return user;
+			}));
+	}
 
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-  }
+	logout() {
+		// remove user from local storage to log user out
+		localStorage.removeItem('currentUser');
+	}
 }

@@ -36,6 +36,8 @@ import { AccountdetailComponent } from './Components/accountdetail/accountdetail
 	providers: [
 		BalanceService
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [
+		AppComponent,
+	]
 })
 export class AppModule { }
