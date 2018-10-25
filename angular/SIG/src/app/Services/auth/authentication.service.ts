@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 interface UserToken {
-	user: Object,
-	token: String,
+	user: object,
+	token: string,
 }
 
 @Injectable({
@@ -19,6 +19,20 @@ export class AuthenticationService {
 		// withCredentials: true,
 	};
 
+	temp(token: string) {
+		let options = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'jwt-auth-token': token,
+			}),
+		}
+		return this.http.post<any>('http://localhost:8085/SIG/ViewAccountServlet', {}, options)
+			.pipe(map(user => {
+				console.log(user);
+				return user;
+			}));
+	}
+
 	login(username: string, password: string) {
 
 		let body = new HttpParams();
@@ -32,6 +46,7 @@ export class AuthenticationService {
 		//Have response return user with username and jwt token
 		return this.http.post<UserToken>('http://localhost:8085/SIG/LoginServlet', body, this.httpOptions)
 			.pipe(map(user => {
+
 				// login successful if there's a jwt token in the response
 				console.log(user.token);
 				console.log(user.user);

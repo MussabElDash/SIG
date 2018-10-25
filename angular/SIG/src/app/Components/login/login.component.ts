@@ -30,13 +30,16 @@ export class LoginComponent implements OnInit {
 
 	onSubmit() {
 		this.submitted = true;
-
+		let t = this;
 		this.loading = true;
 		this.authenticationService.login(this.f.username.value, this.f.password.value)
 			.subscribe(
 				data => {
 					//Route to login page
 					console.log(data);
+					t.authenticationService.temp(data.token).subscribe(user => {
+						console.log(user);
+					});
 				},
 				error => {
 					//Error logging in

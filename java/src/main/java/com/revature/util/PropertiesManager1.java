@@ -7,11 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-public class PropertiesManager {
+public class PropertiesManager1 {
 	private static Properties properties;
 	private static String PATH = "src/main/resources/props.properties";
 
-	private PropertiesManager() {
+	private PropertiesManager1() {
 	}
 
 	private static Properties load() {
