@@ -8,6 +8,7 @@ import { OrdersComponent } from './Components/orders/orders.component';
 import { AccountsComponent } from './Components/accounts/accounts.component';
 import { HomeComponent } from './Components/home/home.component';
 import { BalanceService } from './Services/balance.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -20,7 +21,8 @@ import { BalanceService } from './Services/balance.service';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [
     BalanceService

@@ -1,3 +1,5 @@
+
+import { Balance } from './../Components/accounts/balance/balance';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
@@ -14,7 +16,10 @@ export class BalanceService {
 
   // this is completely out of wack! I chaneged to Balance after get, and to Balance in second line...
   getBalance() {
-    return this.http.get<Balance[]>("????????????????");
+    return this.http.post<Balance>('http://localhost:8085/SIG/GetAccountTotalsServlet');
   }
 
 }
+
+
+
