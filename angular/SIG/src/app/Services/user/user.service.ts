@@ -13,22 +13,13 @@ export class UserService {
 	register(username: string, pass: string, fname: string, lname: string, address: string,
 		city: string, state: string, zip: number, ssn: number, dob: Date, phone: number) {
 
-		let body = new HttpParams();
-		let headers = new HttpHeaders().set(
-			'Content-Type', 'application/x-www-form-urlencoded'
-		);
-
-		const httpPostOptions = 
-		{
-			headers:
-				new HttpHeaders (
-					{
-						'Content-Type': 'application/x-www-form-urlencoded'
-					}),
-			withCredentials: true,
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}),
 		};
-		
 
+		let body = new HttpParams();
 		body = body.set('username', username);
 		body = body.set('pass', pass);
 		body = body.set('fname', fname);
@@ -42,8 +33,7 @@ export class UserService {
 		body = body.set('phone', phone.toString());
 
 		return this.http.post("http://localhost:8085/SIG/RegistrationServlet",
-			body, httpPostOptions);
-
+			body, httpOptions);
 
 	}
 

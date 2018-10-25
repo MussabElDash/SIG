@@ -20,6 +20,7 @@ import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 import com.revature.services.auth.KeyService;
 import com.revature.services.auth.TokenService;
+import com.revature.util.JsonUtil;
 import com.revature.util.LogInterface;
 
 /**
@@ -55,22 +56,28 @@ public class LoginServlet extends HttpServlet {
 			} catch (NoSuchAlgorithmException | JOSEException e) {
 				LogInterface.logStackTrace(e);
 			}
-			// create a secure cookie to hold the token
-			Cookie cookie = new Cookie("jwt-auth-token", token);
-			// ensure that the cookie is sent over HTTPS only
-			cookie.setSecure(true);
-			// ensure that the cookie can be accessed from JavaScript
-			cookie.setHttpOnly(false);
-			// a negative value means that the cookie is not stored persistently and will be
-			// deleted when the Web browser exits
-			cookie.setMaxAge(-1);
-			// the domain name within which this cookie is visible; form is according to RFC
-			// 2109
-			// cookie.setDomain(request.getServerName());
-			// make the cookie visible to all pages
-			cookie.setPath("/");
-			// add the cookie to the response and return from the doPost() method
-			response.addCookie(cookie);
+//			// create a secure cookie to hold the token
+//			Cookie cookie = new Cookie("jwt-auth-token", token);
+//			// ensure that the cookie is sent over HTTPS only
+//			cookie.setSecure(false);
+//			// ensure that the cookie can be accessed from JavaScript
+//			cookie.setHttpOnly(false);
+//			// a negative value means that the cookie is not stored persistently and will be
+//			// deleted when the Web browser exits
+//			cookie.setMaxAge(-1);
+//			// the domain name within which this cookie is visible; form is according to RFC
+//			// 2109
+//			// cookie.setDomain(request.getServerName());
+//			// make the cookie visible to all pages
+//			cookie.setPath("/");
+//			// add the cookie to the response and return from the doPost() method
+//			response.addCookie(cookie);
+			u.setPass("");
+			String jsonUser = JsonUtil.convertJavaToJson(u);
+			u.setPass(password);
+			String json = "{\"user\": " + jsonUser + ", \"token\": \"" + token + "\"}";
+			response.setContentType("application/json");
+			response.getWriter().print(json);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 			return;
 

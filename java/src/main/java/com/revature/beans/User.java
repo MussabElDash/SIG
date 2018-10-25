@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.ColumnDefault;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "users")
 @Check(constraints = "approval_flag IN (-1, 0, 1)")
@@ -21,6 +23,7 @@ public class User {
 	@Column(name = "username")
 	private String username;
 
+	@JsonIgnore
 	@Column(name = "pass", nullable = false)
 	private String pass;
 
@@ -42,6 +45,7 @@ public class User {
 	@Column(name = "zip", nullable = false)
 	private Integer zip;
 
+	@JsonIgnore
 	@Column(name = "ssn", nullable = false)
 	private Integer ssn;
 
@@ -55,6 +59,7 @@ public class User {
 	@ColumnDefault(value = "0")
 	private Integer approvalFlag;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "owner")
 	private Set<Account> accounts;
 

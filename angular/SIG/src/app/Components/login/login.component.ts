@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 			.subscribe(
 				data => {
 					//Route to login page
+					console.log(data);
 				},
 				error => {
 					//Error logging in
