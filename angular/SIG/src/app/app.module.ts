@@ -16,6 +16,7 @@ import { HomeComponent } from './Components/home/home.component';
 <<<<<<< HEAD
 import { BalanceService } from './Services/balance.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NewaccountComponent } from './Components/newaccount/newaccount.component';
 
 
 
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     OrdersComponent,
     AccountsComponent,
     HomeComponent,
+    NewaccountComponent,
   ],
   imports: [
     BrowserModule,
