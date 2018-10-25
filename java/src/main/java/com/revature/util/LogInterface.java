@@ -9,7 +9,7 @@ public interface LogInterface {
 
 	public final static Logger logger = LogManager.getRootLogger();
 
-	default public void logStackTrace(Throwable e) {
+	public static void logStackTrace(Throwable e) {
 		StringWriter writer = new StringWriter();
 		PrintWriter printWriter = new PrintWriter(writer);
 		e.printStackTrace(printWriter);
