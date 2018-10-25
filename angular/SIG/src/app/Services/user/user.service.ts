@@ -1,7 +1,7 @@
+import { Account } from './../../_models/account';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Security } from 'src/app/_models/security';
 
 @Injectable({
 	providedIn: 'root'
@@ -38,7 +38,7 @@ export class UserService {
 	}
 
 	getAcctService(){
-		return this.http.get<Security[]>("http://localhost:8085/SIG/ViewAccountServlet")
+		return this.http.get<Account[]>("http://localhost:8085/SIG/ViewAccountServlet")
 	}
 
 
