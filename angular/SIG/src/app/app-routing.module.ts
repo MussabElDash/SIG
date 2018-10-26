@@ -1,4 +1,4 @@
-import { AppComponent } from './app.component';
+// import { AppComponent } from './app.component';
 import { HomeComponent } from './Components/home/home.component';
 import { AccountsComponent } from './Components/accounts/accounts.component';
 import { RegisterComponent } from './Components/register/register.component';
@@ -11,14 +11,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-	{ path: '', component: HomeComponent },
+	// { path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'accounts', component: AccountsComponent },
 	{ path: 'home', component: HomeComponent },
-	{ path: 'accounts-summary', component: AccountsComponent },
 	{ path: 'register', component: RegisterComponent },
 	{ path: 'orders', component: OrdersComponent },
 	{ path: 'account-details', component: AccountdetailComponent },
+	{ path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
