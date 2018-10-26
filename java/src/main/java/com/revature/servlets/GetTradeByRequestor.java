@@ -37,7 +37,7 @@ public class GetTradeByRequestor extends HttpServlet {
 		TradesDao tdao = new TradesDaoImpl();
 		AccountDAO adao = new AccountDAOImpl();
 		UserDAO udao = new UserDAOImpl();
-		User u = udao.getUser(request.getParameter("username"));
+		User u = LoginServlet.getLoggedUser(request);
 		Account requestorAccount = adao.getAccount(Long.parseLong(request.getParameter("aid")));
 		
 		ArrayList<Trade> requestorTrades = null;

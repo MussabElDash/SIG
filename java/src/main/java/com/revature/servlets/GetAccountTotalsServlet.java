@@ -41,7 +41,7 @@ public class GetAccountTotalsServlet extends HttpServlet {
 		AccountDAO adao = new AccountDAOImpl();
 		SecurityDao sdao = new SecurityDaoImpl();
 		
-		User u = (User)request.getSession().getAttribute("user"); //TODO: Session vars
+		User u = LoginServlet.getLoggedUser(request);
 		ArrayList<Account> pa = (ArrayList<Account>)adao.getAccountsByUser(u);
 		ArrayList<Security> as = null;
 		AssetPricing ap = null;

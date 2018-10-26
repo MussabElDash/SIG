@@ -31,7 +31,7 @@ public class ViewAccountServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Logger log = LogInterface.logger;
-		User u = (User)request.getSession().getAttribute("user");
+		User u = LoginServlet.getLoggedUser(request);
 		AccountDAO adao = new AccountDAOImpl();
 		
 		Account a = null;

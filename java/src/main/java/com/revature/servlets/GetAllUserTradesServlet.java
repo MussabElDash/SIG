@@ -37,7 +37,7 @@ public class GetAllUserTradesServlet extends HttpServlet {
 
 		Logger log = LogInterface.logger;
 		
-		User u = (User)request.getSession().getAttribute("user"); //TODO figure out how the username is passed from Angular.
+		User u = LoginServlet.getLoggedUser(request);
 		ArrayList<Trade> tradeList = null;
 		
 		TradesDao tdao = new TradesDaoImpl();

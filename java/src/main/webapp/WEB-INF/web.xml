@@ -10,42 +10,39 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <filter>
-		<filter-name>CorsFilter</filter-name>
-		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-		<init-param>
-			<param-name>cors.allowed.origins</param-name>
-			<param-value>http://localhost:4200</param-value>
-		</init-param>
-		<init-param>
-			<param-name>cors.allowed.methods</param-name>
-			<param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
-		</init-param>
-		<init-param>
-			<param-name>cors.allowed.headers</param-name>
-			<param-value>Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt-auth-token</param-value>
-		</init-param>
-		<!-- <init-param> <param-name>cors.support.credentials</param-name> <param-value>true</param-value> 
-			</init-param> -->
-	</filter>
-	<filter-mapping>
-		<filter-name>CorsFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<filter>
-		<display-name>AuthenticationFilter</display-name>
-		<filter-name>AuthenticationFilter</filter-name>
-		<filter-class>com.revature.filters.AuthenticationFilter</filter-class>
-		<init-param>
-			<description>Url Patterns to be ignored by this filter</description>
-			<param-name>ignorePatterns</param-name>
-			<param-value>/LoginServlet,/RegistrationServlet</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>AuthenticationFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+    <init-param>
+      <param-name>cors.allowed.origins</param-name>
+      <param-value>http://localhost:4200</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.allowed.methods</param-name>
+      <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
+    </init-param>
+    <init-param>
+      <param-name>cors.allowed.headers</param-name>
+      <param-value>Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt-auth-token</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>AuthenticationFilter</display-name>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>com.revature.filters.AuthenticationFilter</filter-class>
+    <init-param>
+      <description>Url Patterns to be ignored by this filter</description>
+      <param-name>ignorePatterns</param-name>
+      <param-value>/LoginServlet,/RegistrationServlet</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -206,4 +203,34 @@
     <servlet-name>FullyApproveTrade</servlet-name>
     <url-pattern>/FullyApproveTrade</url-pattern>
   </servlet-mapping>
- </web-app>
+  <servlet>
+    <description></description>
+    <display-name>NewOrderServlet</display-name>
+    <servlet-name>NewOrderServlet</servlet-name>
+    <servlet-class>com.revature.servlets.NewOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewOrderServlet</servlet-name>
+    <url-pattern>/NewOrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SetOrderBrokerApproval</display-name>
+    <servlet-name>SetOrderBrokerApproval</servlet-name>
+    <servlet-class>com.revature.servlets.SetOrderBrokerApproval</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetOrderBrokerApproval</servlet-name>
+    <url-pattern>/SetOrderBrokerApproval</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetTradeByReciever</display-name>
+    <servlet-name>GetTradeByReciever</servlet-name>
+    <servlet-class>com.revature.servlets.GetTradeByReciever</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetTradeByReciever</servlet-name>
+    <url-pattern>/GetTradeByReciever</url-pattern>
+  </servlet-mapping>
+</web-app>

@@ -152,10 +152,10 @@ public class Trade {
 
 	@Override
 	public String toString() {
-		return "Trade [id=" + id + ", requesterAccount=" + requesterAccount + ", receiverAccount=" + receiverAccount
+		return "Trade [id=" + id + ", requesterAccount=" + requesterAccount.toString() + ", receiverAccount=" + receiverAccount.toString()
 				+ ", brokerStatus=" + brokerStatus + ", receiverApproval=" + receiverApproval + ", requesterSecurity="
-				+ requesterSecurity + ", receiverSecutiy=" + receiverSecutiy + ", amountrequester=" + amountrequester
-				+ ", amountReceiver=" + amountReceiver + ", createdOn=" + createdOn + "]";
+				+ requesterSecurity.toString() + ", receiverSecutiy=" + receiverSecutiy.toString() + ", amountrequester=" + amountrequester
+				+ ", amountReceiver=" + amountReceiver + ", createdOn=" + createdOn.toString() + "]";
 	}
 
 	public Trade(Long id, Account requesterAccount, Account receiverAccount, Integer brokerStatus, Integer receiverApproval,
