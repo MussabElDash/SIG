@@ -122,6 +122,34 @@ public class Trade {
 		this.createdOn = createdOn;
 	}
 
+	public Account getRequesterAccount() {
+		return requesterAccount;
+	}
+
+	public void setRequesterAccount(Account requesterAccount) {
+		this.requesterAccount = requesterAccount;
+	}
+
+	public Security getRequesterSecurity() {
+		return requesterSecurity;
+	}
+
+	public void setRequesterSecurity(Security requesterSecurity) {
+		this.requesterSecurity = requesterSecurity;
+	}
+
+	public Security getReceiverSecutiy() {
+		return receiverSecutiy;
+	}
+
+	public void setReceiverSecutiy(Security receiverSecutiy) {
+		this.receiverSecutiy = receiverSecutiy;
+	}
+
+	public void setReceiverAccount(Account receiverAccount) {
+		this.receiverAccount = receiverAccount;
+	}
+
 	@Override
 	public String toString() {
 		return "Trade [id=" + id + ", requesterAccount=" + requesterAccount + ", receiverAccount=" + receiverAccount

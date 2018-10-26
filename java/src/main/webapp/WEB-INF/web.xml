@@ -149,4 +149,24 @@
     <servlet-name>CreateAccountServlet</servlet-name>
     <url-pattern>/CreateAccountServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SellSecurityServlet</display-name>
+    <servlet-name>SellSecurityServlet</servlet-name>
+    <servlet-class>com.revature.servlets.SellSecurityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SellSecurityServlet</servlet-name>
+    <url-pattern>/SellSecurityServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FullyApproveTrade</display-name>
+    <servlet-name>FullyApproveTrade</servlet-name>
+    <servlet-class>com.revature.servlets.FullyApproveTrade</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FullyApproveTrade</servlet-name>
+    <url-pattern>/FullyApproveTrade</url-pattern>
+  </servlet-mapping>
 </web-app>
