@@ -12,15 +12,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-	// { path: '', component: HomeComponent },
-	{ path: 'login', component: LoginComponent },
-	{ path: 'accounts', component: AccountsComponent },
-	{ path: 'home', component: HomeComponent },
-	{ path: 'register', component: RegisterComponent },
-	{ path: 'orders', component: OrdersComponent },
-	{ path: 'account-details', component: AccountdetailComponent },
-	{ path: 'add-account', component: AddaccountComponent},
-	{ path: '**', redirectTo: 'home', pathMatch: 'full' },
+ // { path: '', component: HomeComponent },
+ { path: 'login', component: LoginComponent },
+ { path: 'accounts', component: AccountsComponent },
+ { path: 'home', component: HomeComponent },
+ { path: 'register', component: RegisterComponent },
+ { path: 'orders', component: OrdersComponent },
+ { path: 'account-details', component: AccountdetailComponent },
+ { path: 'add-account', component: AddaccountComponent},
+ { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
