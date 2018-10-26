@@ -15,13 +15,13 @@
       <h1>You have no accounts!</h1>
     </div>
 
-    <div *ngIf="accounts?.length > 0">
+    <div class="col-md-12" *ngIf="accounts?.length > 0">
 
-      <div class="col-sm-6 inline-block" *ngFor="let acc of accounts">
+      <div class="col-sm-6" *ngFor="let acc of accounts">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{acc.accountName}}</h5>
-            <p class="card-text">{{acc.balance}}</p>
+            <p class="card-text">Current Balance: {{acc.balance}}</p>
             <form [formGroup]="acctForm" (ngSubmit)="viewAccout(acc.id)">
               <button class="btn btn-primary">View Account Details</button>
             </form>
