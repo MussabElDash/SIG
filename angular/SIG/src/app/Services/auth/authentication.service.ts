@@ -51,8 +51,8 @@ export class AuthenticationService {
 				console.log(user.token);
 				console.log(user.user);
 				if (user) {
-				// 	store user details and jwt token in local storage to keep user logged in between page refreshes
-				localStorage.setItem('currentUser', JSON.stringify(user));
+					// 	store user details and jwt token in local storage to keep user logged in between page refreshes
+					localStorage.setItem('currentUser', JSON.stringify(user));
 				}
 
 				return user;
@@ -66,13 +66,16 @@ export class AuthenticationService {
 
 	isLoggedIn() {
 		let currentUser = this.getCurrentUser();
-		if(currentUser){
+		if (currentUser) {
 			return true;
 		}
 		return false;
 	}
 
 	getCurrentUser() {
-		return JSON.parse(localStorage.getItem('currentUser')).user;
+		let stored = JSON.parse(localStorage.getItem('currentUser'));
+		if (stored && stored.token) {
+			return stored.user;
+		}
 	}
 }
