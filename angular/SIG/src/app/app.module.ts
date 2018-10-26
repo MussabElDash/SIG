@@ -39,6 +39,8 @@ import { NewaccountComponent } from './Components/newaccount/newaccount.componen
   bootstrap: [AppComponent]
 =======
 import { AccountdetailComponent } from './Components/accountdetail/accountdetail.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
+import { WelcomeComponent } from './Components/welcome/welcome.component';
 
 @NgModule({
 	declarations: [
@@ -49,6 +51,8 @@ import { AccountdetailComponent } from './Components/accountdetail/accountdetail
 		AccountsComponent,
 		HomeComponent,
 		AccountdetailComponent,
+		NavbarComponent,
+		WelcomeComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -61,7 +65,13 @@ import { AccountdetailComponent } from './Components/accountdetail/accountdetail
 	providers: [
 		BalanceService
 	],
+<<<<<<< HEAD
 	bootstrap: [AppComponent]
 >>>>>>> 8b1d5c14fe6acac9de1e30bbdd7455f7b31ffe3d
+=======
+	bootstrap: [
+		AppComponent,
+	]
+>>>>>>> 45203971426a2d87718069577aee3cbb57e7ad9a
 })
 export class AppModule { }
