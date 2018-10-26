@@ -55,6 +55,7 @@ public class SellSecurityServlet extends HttpServlet {
 		
 		if(hasCash == true) {
 			cashSecurity.setAmount(cashSecurity.getAmount() + (int)(s.getAmount()*s.getAp().getPrice()));
+			sdao.removeSecurityById(s.getId());
 		}
 		else {
 			Security dollarSec = new Security();
@@ -65,6 +66,7 @@ public class SellSecurityServlet extends HttpServlet {
 			dollarSec.setOwnerAccount(a);
 			
 			sdao.insertSecurity(dollarSec);
+			sdao.removeSecurityById(s.getId());
 		}
 		
 	}
