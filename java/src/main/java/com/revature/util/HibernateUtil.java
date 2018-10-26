@@ -12,7 +12,6 @@ import com.revature.beans.Order;
 import com.revature.beans.Security;
 import com.revature.beans.Trade;
 import com.revature.beans.User;
-import com.revature.dao.UserDAOImpl;
 
 /*
  * SessionFactory is configured as a singleton.
@@ -25,6 +24,7 @@ public class HibernateUtil {
 	private static SessionFactory sessionFactory = createSessionFactory();
 
 	private static SessionFactory createSessionFactory() {
+		AssetPricingScheduler.Start();
 		Configuration configuration = new Configuration();
 		configuration.configure();
 		// ADDing The Mapping Here
