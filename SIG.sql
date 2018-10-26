@@ -29,8 +29,7 @@ CREATE TABLE accounts (
     username VARCHAR(100) NOT NULL,
     balance NUMBER(*,2) DEFAULT 0,
     CONSTRAINT account_pk PRIMARY KEY (account_id),
-    CONSTRAINT account_user_fk FOREIGN KEY (username) REFERENCES users (username),
-    CONSTRAINT accounts_type_chk CHECK (account_type IN ('Brokerage', 'IRA'))
+    CONSTRAINT account_user_fk FOREIGN KEY (username) REFERENCES users (username)
 );
 
 CREATE TABLE asset_pricing(

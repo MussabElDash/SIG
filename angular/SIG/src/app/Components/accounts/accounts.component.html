@@ -11,7 +11,31 @@
 
 <div style="text-align: center;">
   <div class="row">
-    <div class="col-sm-6">
+    <div *ngIf="accounts?.length == 0">
+      <h1>You have no accounts!</h1>
+    </div>
+
+    <div *ngIf="accounts?.length > 0">
+
+      <div class="col-sm-6 inline-block" *ngFor="let acc of accounts">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{acc.accountName}}</h5>
+            <p class="card-text">{{acc.balance}}</p>
+            <form [formGroup]="acctForm" (ngSubmit)="viewAccout(acc.id)">
+              <button class="btn btn-primary">View Account Details</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div style="text-align: center;">
+  <div class="row">
+    <div class="col-sm-6 inline-block">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Brokerage Account ...7844</h5>
@@ -32,6 +56,7 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 <form style="text-align: center;">
   <button type="submit" class="btn btn-primary" style="text-align: center;">Create Account</button>
   <!--<a href="#" class="btn btn-primary" style="text-align: center;">Create Account</a>-->
@@ -40,3 +65,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+=======
+<br/>
+<div class="col-md-2">
+      <button class="btn btn-primary" (click) = "addAccount()">ADD AN ACCOUNT</button>
+</div>
+
+>>>>>>> af5ff2e8416f429f92fca7acee819e3abb05c7d4

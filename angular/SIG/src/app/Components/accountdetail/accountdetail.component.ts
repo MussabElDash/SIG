@@ -23,10 +23,10 @@ export class AccountdetailComponent implements OnInit {
 
   ngOnInit() {
     this.userService
-    .getAcctService()
+    .getDetAcct()
     .subscribe( 
       data =>{
-        this.account = data;
+        //this.account = data;
       }, 
       error=>{ console.log("woops")});
   }

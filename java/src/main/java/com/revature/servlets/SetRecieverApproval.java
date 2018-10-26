@@ -38,6 +38,7 @@ public class SetRecieverApproval extends HttpServlet {
 				log.info("Trade [ Trade ID: " + t.getId() + " ] successfully APPROVED by reciever.");
 				
 				if(t.getBrokerStatus() > 0l && t.getReceiverApproval() > 0l) {
+					request.getSession().setAttribute("trade", t);
 					request.getRequestDispatcher("/FullyApproveTrade").forward(request, response);
 				}
 			}

@@ -30,7 +30,7 @@ public class ViewTradeServlet extends HttpServlet {
 		
 		TradesDao tdao = new TradesDaoImpl();
 		
-		User u = (User)request.getSession().getAttribute("user");
+		User u = LoginServlet.getLoggedUser(request);
 		
 		Trade t = tdao.selectTradesByTradeId(Long.parseLong(request.getParameter("tid")));
 		

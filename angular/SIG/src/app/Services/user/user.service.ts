@@ -1,14 +1,18 @@
+import { AuthenticationService } from './../auth/authentication.service';
 import { Account } from './../../_models/account';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UserService {
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient,
+		private authService:AuthenticationService,
+		private router: Router) { }
 
 	register(username: string, pass: string, fname: string, lname: string, address: string,
 		city: string, state: string, zip: number, ssn: number, dob: Date, phone: number) {
@@ -38,7 +42,53 @@ export class UserService {
 	}
 
 	getAcctService(){
-		return this.http.get<Account>("http://localhost:8085/SIG/ViewAccountServlet");
+
+		// const httpOptions = {
+		// 	headers: new HttpHeaders({
+		// 		'Content-Type': 'application/x-www-form-urlencoded'
+		// 	}),
+		// };
+
+		let currentUser = this.authService.getCurrentUser;
+
+		if(currentUser){
+
+			return this.http.get<Account[]>("http://localhost:8085/SIG/GetUserAccountsServlet")
+			.pipe(map(userAccounts => {
+				console.log(userAccounts);
+				return userAccounts;
+			}));
+
+		}else{
+			this.router.navigate((['login']));
+		}
+
+		
+	}
+
+	getDetAcct(){
+		return this.http.get<Account>("http://localhost:8085/SIG/ViewAccountServlet")
+		.pipe(map(account => {
+			console.log(account);
+			return account;
+		}))
+	}
+
+	addAccount(accountName: string, accountType: string){
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}),
+		};
+
+		let body = new HttpParams();
+		body = body.set('accountName', accountName);
+		body = body.set('accountType', accountType);
+
+
+		return this.http.post("http://localhost:8085/SIG/CreateAccountServlet",
+			body, httpOptions);
+
 	}
 
 

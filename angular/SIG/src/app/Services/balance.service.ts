@@ -1,3 +1,4 @@
+import { AuthenticationService } from './auth/authentication.service';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -9,9 +10,11 @@ export class Balance {};
 	providedIn: 'root'
 })
 export class BalanceService {
+
 	// I need this service to return balance(s) from our DB.
 	constructor(private http: HttpClient,
-				private router: Router) { }
+		private router: Router,
+		private authService: AuthenticationService) { }
 
 	
 
@@ -22,20 +25,18 @@ export class BalanceService {
 	// this is completely out of wack! I chaneged to Balance after get, and to Balance in second line...
 	getBalance() {
 
-		let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+		let currentUser = this.authService.getCurrentUser;
 
 		if (currentUser){
 
-			return this.http.post<Balance>("http://localhost:8085/SIG/GetAccountTotalsServlet", currentUser.user)
+			return this.http.post<Balance>("http://localhost:8085/SIG/GetAccountTotalsServlet", currentUser)
 			.pipe(map(amount => {
-				console.log(amount);
 				return amount;
 			}));
 
 		}else{
 			this.router.navigate(['/login']);
 		}
-		// return this.http.get<Balance[]>("????????????????");
 	}
 
 }

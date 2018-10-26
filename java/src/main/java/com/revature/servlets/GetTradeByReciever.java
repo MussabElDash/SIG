@@ -11,50 +11,47 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.beans.Account;
+import com.revature.beans.Trade;
 import com.revature.beans.User;
 import com.revature.dao.AccountDAO;
 import com.revature.dao.AccountDAOImpl;
+import com.revature.dao.TradesDao;
+import com.revature.dao.TradesDaoImpl;
 import com.revature.dao.UserDAO;
 import com.revature.dao.UserDAOImpl;
 import com.revature.util.JsonUtil;
 import com.revature.util.LogInterface;
 
 /**
- * Servlet implementation class GetUserAccountsServlet
+ * Servlet implementation class GetTradeByReciever
  */
-public class GetUserAccountsServlet extends HttpServlet {
+public class GetTradeByReciever extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+      
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		Logger log = LogInterface.logger;
 		
-		UserDAO udao = new UserDAOImpl();
+		TradesDao tdao = new TradesDaoImpl();
 		AccountDAO adao = new AccountDAOImpl();
+		UserDAO udao = new UserDAOImpl();
 		User u = LoginServlet.getLoggedUser(request);
-		ArrayList<Account> userAccounts = (ArrayList<Account>)adao.getAccountsByUser(u);
+		Account recieverAccount = adao.getAccount(Long.parseLong(request.getParameter("aid")));
 		
-		String JSONaccountList = JsonUtil.convertJavaToJson(userAccounts);
+		ArrayList<Trade> recieverTrades = null;
+		
+		recieverTrades = (ArrayList<Trade>)tdao.selectTradesByReceiverAccount(recieverAccount);
+		
+		String JSONrequestorTrades = JsonUtil.convertJavaToJson(recieverTrades);
 		response.setContentType("application/json");
-		response.getWriter().write(JSONaccountList);
+		response.getWriter().write(JSONrequestorTrades);
 		
-		if(userAccounts != null) {
-			log.info("User [ " + u.getUsername() + " ] accessing a list of all of their accounts.");
+		if(recieverTrades != null) {
+			log.info("User [ " + u.getUsername() + " ] accessing recieved trades on account [ Account ID: " + recieverAccount.getId() + " ]");
 		}
 		else {
-			log.error("User [ " + u.getUsername() + " ] attempted and failed to retrieve a list of all of their accounts.");
+			log.error("User [ " + u.getUsername() + " ] FAILED to access recieved trades on account [ Account ID: " + recieverAccount.getId() + " ]");
 		}
-		
 	}
 
 }
