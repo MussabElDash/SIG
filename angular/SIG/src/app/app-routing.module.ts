@@ -19,7 +19,7 @@ const routes: Routes = [
 	{ path: 'register', component: RegisterComponent },
 	{ path: 'orders', component: OrdersComponent },
 	{ path: 'account-details/:acctId', component: AccountdetailComponent },
-	{ path: 'add-account', component: AddaccountComponent},
+	{ path: 'add-account', component: AddaccountComponent },
 	{ path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
