@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from './../../Services/user/user.service';
 import { Account } from './../../_models/account';
@@ -19,7 +19,8 @@ export class AccountsComponent implements OnInit {
   accounts:Account[];
   constructor(private balanceService: BalanceService,
     private userService: UserService,
-    private router: Router) {
+    private router: Router,
+    private formBuilder: FormBuilder) {
 
    }
 
@@ -38,6 +39,10 @@ export class AccountsComponent implements OnInit {
           this.accounts = data;
         }
       )
+
+      this.acctForm = this.formBuilder.group({
+
+      });
     
   }
 

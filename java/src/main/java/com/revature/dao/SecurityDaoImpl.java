@@ -164,7 +164,7 @@ public class SecurityDaoImpl implements SecurityDao{
 		
 		try {
 			
-			Query query = session.createQuery("FROM Security WHERE OwnerAccount = :givenAcct");
+			Query query = session.createQuery("FROM Security WHERE ownerAccount = :givenAcct");
 			query.setParameter("givenAcct", acct);
 			
 			securities = query.list();

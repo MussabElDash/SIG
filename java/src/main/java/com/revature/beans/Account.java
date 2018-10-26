@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,16 +43,16 @@ public class Account {
 	@JoinColumn(name = "username", nullable = false)
 	private User owner;
 
-	@OneToMany(mappedBy = "ownerAccount")
+	@OneToMany(mappedBy = "ownerAccount", fetch = FetchType.EAGER)
 	private Set<Order> orders;
 
-	@OneToMany(mappedBy = "ownerAccount")
+	@OneToMany(mappedBy = "ownerAccount", fetch = FetchType.EAGER)
 	private Set<Security> securities;
 
-	@OneToMany(mappedBy = "requesterAccount")
+	@OneToMany(mappedBy = "requesterAccount", fetch = FetchType.EAGER)
 	private Set<Trade> requesterTrades;
 
-	@OneToMany(mappedBy = "receiverAccount")
+	@OneToMany(mappedBy = "receiverAccount", fetch = FetchType.EAGER)
 	private Set<Trade> receiverTrades;
 
 	public Account(long id, String accountType, String accountName, double balance, User owner) {
