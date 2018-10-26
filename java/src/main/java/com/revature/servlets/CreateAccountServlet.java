@@ -29,21 +29,19 @@ public class CreateAccountServlet extends HttpServlet {
 		
 		AccountDAO adao = new AccountDAOImpl();
 		Account a = new Account();
-		User u = (User)request.getSession().getAttribute("user");
 		
+		User u = LoginServlet.getLoggedUser(request);
+
 		a.setAccountType(request.getParameter("accountType"));
 		a.setAccountName(request.getParameter("accountName"));
 		a.setBalance(0.0);
 		a.setOwner((User)request.getSession().getAttribute("user"));
 		
-		long newid = adao.addAccount(a);
-		
-		if(newid != 0l) {
-			log.info("User [ " + u.getUsername() + " ] succesffully requested a new account [ Account ID: " + newid + " ].");
-			log.info("\tTrade information: " + a.toString());
+		if(adao.addAccount(a) != null) {
+			log.info("User [ " + u.getUsername() + " ] succesffully requested a new account [ Account ID: " + a.getId() + " ].");
 		}
 		else {
-			log.error("User [ " + u.getUsername() + " ] FAILED to request a new account [ Account ID: " + newid + " ].");
+			log.error("User [ " + u.getUsername() + " ] FAILED to request a new account.");
 		}
 		
 	}
