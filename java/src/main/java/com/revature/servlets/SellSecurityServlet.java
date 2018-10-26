@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.beans.Account;
+import com.revature.beans.AssetPricing;
 import com.revature.beans.Security;
-import com.revature.dao.AccountDAO;
-import com.revature.dao.AccountDAOImpl;
+import com.revature.dao.AssetPricingDao;
+import com.revature.dao.AssetPricingDaoImpl;
 import com.revature.dao.SecurityDao;
 import com.revature.dao.SecurityDaoImpl;
 import com.revature.util.LogInterface;
@@ -34,27 +35,36 @@ public class SellSecurityServlet extends HttpServlet {
 		Logger log = LogInterface.logger;
 		
 		SecurityDao sdao = new SecurityDaoImpl();
+		AssetPricingDao apdao = new AssetPricingDaoImpl();
 		Security s = sdao.selectSecurityById(Long.parseLong(request.getParameter("sid")));
-		Security toCash = null;
+		AssetPricing ap = apdao.selectAssetPricingByTickerSymbol("Dollar");
 		
 		Account a = s.getOwnerAccount();
 		
 		Set<Security> securities = a.getSecurities();
 		boolean hasCash = false;
-		
+		Security cashSecurity = null;
 		
 		for(Security sec : securities) {
-			if(sec.getAp().getTickerSymbol().equals("CASH")) {
+			if(sec.getAp().getTickerSymbol().equals("Dollar")) {
 				hasCash = true;
+				cashSecurity = sec;
 				break;
 			}
 		}
 		
 		if(hasCash == true) {
-			//TODO Add to cash
+			cashSecurity.setAmount(cashSecurity.getAmount() + (int)(s.getAmount()*s.getAp().getPrice()));
 		}
 		else {
-			//TODO Add a NEW cash security to account
+			Security dollarSec = new Security();
+			
+			dollarSec.setType("Cash");
+			dollarSec.setAp(ap);
+			dollarSec.setAmount((int)(s.getAmount()*s.getAp().getPrice()));
+			dollarSec.setOwnerAccount(a);
+			
+			sdao.insertSecurity(dollarSec);
 		}
 		
 	}
