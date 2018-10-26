@@ -5,54 +5,54 @@ import { Account } from './../../_models/account';
 import { BalanceService } from './../../Services/balance.service';
 import { Component, OnInit } from '@angular/core';
 
-export class Balance {};
+export class Balance { };
 
 @Component({
-  selector: 'app-accounts',
-  templateUrl: './accounts.component.html',
-  styleUrls: ['./accounts.component.css']
+	selector: 'app-accounts',
+	templateUrl: './accounts.component.html',
+	styleUrls: ['./accounts.component.css']
 })
 export class AccountsComponent implements OnInit {
-  acctForm: FormGroup;
-  // I need balance
-  balance:Balance;
-  accounts:Account[];
-  constructor(private balanceService: BalanceService,
-    private userService: UserService,
-    private router: Router,
-    private formBuilder: FormBuilder) {
+	acctForm: FormGroup;
+	// I need balance
+	balance: Balance;
+	accounts: Account[];
+	constructor(private balanceService: BalanceService,
+		private userService: UserService,
+		private router: Router,
+		private formBuilder: FormBuilder) {
 
-  }
+	}
 
-  ngOnInit() {
-    this.balanceService.getBalance()
-    .subscribe(
-      data =>{
-        this.balance = data;
-      }
+	ngOnInit() {
+		this.balanceService.getBalance()
+			.subscribe(
+				data => {
+					this.balance = data;
+				}
 
-    )
+			)
 
-    this.userService.getAcctService()
-      .subscribe(
-        data =>{
-          this.accounts = data;
-        }
-      )
+		this.userService.getAcctService()
+			.subscribe(
+				data => {
+					this.accounts = data;
+				}
+			)
 
-      this.acctForm = this.formBuilder.group({
+		this.acctForm = this.formBuilder.group({
 
-      });
-    
-  }
+		});
 
-  viewAccount( accountId:number ){
+	}
 
-    this.router.navigate(['accout-details']);
-  }
+	viewAccount(accountId: number) {
 
-  addAccount(){
-    this.router.navigate(['add-account']);
-  }
+		this.router.navigate(['account-details']);
+	}
+
+	addAccount() {
+		this.router.navigate(['add-account']);
+	}
 
 }

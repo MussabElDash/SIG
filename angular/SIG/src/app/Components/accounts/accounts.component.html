@@ -22,7 +22,7 @@
           <div class="card-body">
             <h5 class="card-title">{{acc.accountName}}</h5>
             <p class="card-text">Current Balance: {{acc.balance}}</p>
-            <form [formGroup]="acctForm" (ngSubmit)="viewAccout(acc.id)">
+            <form [formGroup]="acctForm" (ngSubmit)="viewAccount(acc.id)">
               <button class="btn btn-primary">View Account Details</button>
             </form>
           </div>
@@ -56,8 +56,7 @@
   </div>
 </div>
 
-<br/>
+<br />
 <div class="col-md-2">
-      <button class="btn btn-primary" (click) = "addAccount()">ADD AN ACCOUNT</button>
+  <button class="btn btn-primary" (click)="addAccount()">ADD AN ACCOUNT</button>
 </div>
-

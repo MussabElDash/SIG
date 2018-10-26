@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+<nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <a class="navbar-brand mb-0 h1" routerLink="home">
     <img src="/assets/img/Stetson_Broken_Bow.png" width="30" height="30" class="d-inline-block align-top">
     SIG
@@ -10,7 +13,7 @@
         <a class="nav-item nav-link" routerLinkActive="active" routerLink="accounts">Summary</a>
       </ng-template>
     </div>
-    <div class="dropdown col-6">
+    <div class="dropdown col">
       <span class="navbar-text dropdown-toggle float-right" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{ userName() }}
       </span>
