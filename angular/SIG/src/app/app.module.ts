@@ -19,33 +19,6 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { AddaccountComponent } from './Components/addaccount/addaccount.component';
 
 @NgModule({
-<<<<<<< HEAD
-declarations: [
-AppComponent,
-LoginComponent,
-RegisterComponent,
-OrdersComponent,
-AccountsComponent,
-HomeComponent,
-AccountdetailComponent,
-NavbarComponent,
-],
-imports: [
-BrowserModule,
-AppRoutingModule,
-ReactiveFormsModule,
-HttpClientModule,
-FormsModule,
-ReactiveFormsModule,
-],
-providers: [
-BalanceService,
-{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
-],
-bootstrap: [
-AppComponent,
-]
-=======
 	declarations: [
 		AppComponent,
 		LoginComponent,
@@ -72,6 +45,5 @@ AppComponent,
 	bootstrap: [
 		AppComponent,
 	]
->>>>>>> af5ff2e8416f429f92fca7acee819e3abb05c7d4
 })
 export class AppModule { }
