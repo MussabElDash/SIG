@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
 	userName = 'Guest';
 	constructor(private authenticationService: AuthenticationService) {
 		if (this.authenticationService.isLoggedIn()) {
+			this.loggedIn = true;
 			let currentUser = this.authenticationService.getCurrentUser();
 			this.userName = `${currentUser.fname} ${currentUser.lname}`
 		}

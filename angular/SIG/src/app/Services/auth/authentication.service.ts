@@ -66,10 +66,13 @@ export class AuthenticationService {
 
 	isLoggedIn() {
 		let currentUser = this.getCurrentUser();
-		return currentUser && currentUser.token;
+		if(currentUser){
+			return true;
+		}
+		return false;
 	}
 
 	getCurrentUser() {
-		return JSON.parse(localStorage.getItem('currentUser'));
+		return JSON.parse(localStorage.getItem('currentUser')).user;
 	}
 }
