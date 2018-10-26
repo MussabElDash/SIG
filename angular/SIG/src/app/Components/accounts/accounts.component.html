@@ -1,0 +1,62 @@
+<div class=rsection style="text-align: center;">
+  <h2>Howdy! Welcome to your accounts summary!</h2>
+</div>
+
+<div class="card text-center">
+  <h5 class="card-header">All Accounts</h5>
+  <div class="card-body">
+    <h6 class="card-title">${{balance}}</h6>
+  </div>
+</div>
+
+<div style="text-align: center;">
+  <div class="row">
+    <div *ngIf="accounts?.length == 0">
+      <h1>You have no accounts!</h1>
+    </div>
+
+    <div class="col-md-12" *ngIf="accounts?.length > 0">
+
+      <div class="col-sm-6" *ngFor="let acc of accounts">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{acc.accountName}}</h5>
+            <p class="card-text">Current Balance: {{acc.balance}}</p>
+            <form [formGroup]="acctForm" (ngSubmit)="viewAccount(acc.id)">
+              <button class="btn btn-primary">View Account Details</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div style="text-align: center;">
+  <div class="row">
+    <div class="col-sm-6 inline-block">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Brokerage Account ...7844</h5>
+          <p class="card-text">Current Balance: $50,000,000.00</p>
+          <a href="#" class="btn btn-primary">View Account Details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Roth IRA ...4569</h5>
+          <p class="card-text">Current Balance: $1,000,000.00</p>
+          <a href="#" class="btn btn-primary">View Account Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<div class="col-md-2">
+  <button class="btn btn-primary" (click)="addAccount()">ADD AN ACCOUNT</button>
+</div>

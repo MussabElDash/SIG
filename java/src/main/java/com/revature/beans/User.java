@@ -1,56 +1,70 @@
 package com.revature.beans;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.ColumnDefault;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
+@Check(constraints = "approval_flag IN (-1, 0, 1)")
 public class User {
-	
+
 	@Id
-	@Column(name="username")
+	@Column(name = "username")
 	private String username;
-	
-	@Column(name="pass")
+
+	@JsonIgnore
+	@Column(name = "pass", nullable = false)
 	private String pass;
-	
-	@Column(name="fname")
+
+	@Column(name = "fname", nullable = false)
 	private String fname;
-	
-	@Column(name="lname")
+
+	@Column(name = "lname", nullable = false)
 	private String lname;
-	
-	@Column(name="address")
+
+	@Column(name = "address", nullable = false)
 	private String address;
-	
-	@Column(name="city")
+
+	@Column(name = "city", nullable = false)
 	private String city;
-	
-	@Column(name="state")
+
+	@Column(name = "state", nullable = false)
 	private String state;
-	
-	@Column(name="zip")
-	private Long zip;
-	
-	@Column(name="ssn")
-	private Long ssn;
-	
-	@Column(name="dob")
+
+	@Column(name = "zip", nullable = false)
+	private Integer zip;
+
+	@JsonIgnore
+	@Column(name = "ssn", nullable = false)
+	private Integer ssn;
+
+	@Column(name = "dob", nullable = false)
 	private Date dateOfBirth;
-	
-	@Column(name="phone")
-	private Long phone;
-	
-	@Column(name="approval_flag")
-	private Long approvalFlag;
-	
+
+	@Column(name = "phone", nullable = false)
+	private Integer phone;
+
+	@Column(name = "approval_flag", nullable = false)
+	@ColumnDefault(value = "0")
+	private Integer approvalFlag;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "owner")
+	private Set<Account> accounts;
+
 	public User(String username, String pass, String fname, String lname, String address, String city, String state,
-			long zip, long ssn, Date dateOfBirth, long phone, long approvalFlag) {
+			Integer zip, Integer ssn, Date dateOfBirth, Integer phone, Integer approvalFlag) {
 		super();
 		this.username = username;
 		this.pass = pass;
@@ -137,7 +151,7 @@ public class User {
 		return zip;
 	}
 
-	public void setZip(long zip) {
+	public void setZip(Integer zip) {
 		this.zip = zip;
 	}
 
@@ -145,7 +159,7 @@ public class User {
 		return ssn;
 	}
 
-	public void setSsn(long ssn) {
+	public void setSsn(Integer ssn) {
 		this.ssn = ssn;
 	}
 
@@ -161,7 +175,7 @@ public class User {
 		return phone;
 	}
 
-	public void setPhone(long phone) {
+	public void setPhone(Integer phone) {
 		this.phone = phone;
 	}
 
@@ -169,8 +183,12 @@ public class User {
 		return approvalFlag;
 	}
 
-	public void setApprovalFlag(long approvalFlag) {
+	public void setApprovalFlag(Integer approvalFlag) {
 		this.approvalFlag = approvalFlag;
 	}
-	
+
+	public Set<Account> getAccounts() {
+		return accounts;
+	}
+
 }

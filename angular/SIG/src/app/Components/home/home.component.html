@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <div style="text-align:center">
+    <h1>
+      Welcome to {{ title }}!
+    </h1>
+    <h5>
+      <small>Your </small>Stetson Investment Garage
+    </h5>
+    <img width="600" class="img-fluid" alt="SIG Welcome" src="assets/img/investment.original.jpg">
+  </div>
+  <div *ngIf="!loggedIn()" class="m-5">
+    <app-register></app-register>
+  </div>
+</div>
