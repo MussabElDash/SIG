@@ -1,14 +1,18 @@
+import { AuthenticationService } from './../auth/authentication.service';
 import { Account } from './../../_models/account';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UserService {
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient,
+		private authService:AuthenticationService,
+		private router: Router) { }
 
 	register(username: string, pass: string, fname: string, lname: string, address: string,
 		city: string, state: string, zip: number, ssn: number, dob: Date, phone: number) {
@@ -38,7 +42,28 @@ export class UserService {
 	}
 
 	getAcctService(){
-		return this.http.get<Account>("http://localhost:8085/SIG/ViewAccountServlet");
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}),
+		};
+
+		let currentUser = this.authService.getCurrentUser;
+
+		if(currentUser){
+
+			return this.http.post<Account[]>("http://localhost:8085/SIG/GetUserAccountsServlet", currentUser)
+			.pipe(map(userAccounts => {
+				console.log(userAccounts);
+				return userAccounts;
+			}));
+
+		}else{
+			this.router.navigate((['login']));
+		}
+
+		
 	}
 
 

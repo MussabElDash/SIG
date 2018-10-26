@@ -1,3 +1,5 @@
+import { UserService } from './../../Services/user/user.service';
+import { Account } from './../../_models/account';
 import { BalanceService } from './../../Services/balance.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,7 +13,9 @@ export class Balance {};
 export class AccountsComponent implements OnInit {
   // I need balance
   balance:Balance;
-  constructor(private balanceService: BalanceService) {
+  accounts:Account[];
+  constructor(private balanceService: BalanceService,
+    private userService: UserService) {
 
   }
 
@@ -23,6 +27,14 @@ export class AccountsComponent implements OnInit {
       }
 
     )
+
+    this.userService.getAcctService()
+      .subscribe(
+        data =>{
+          this.accounts = data;
+        }
+      )
+    
   }
 
 }

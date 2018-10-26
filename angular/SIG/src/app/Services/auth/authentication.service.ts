@@ -73,6 +73,9 @@ export class AuthenticationService {
 	}
 
 	getCurrentUser() {
-		return JSON.parse(localStorage.getItem('currentUser')).user;
+		if(localStorage.getItem('currentUser')){
+			return JSON.parse(localStorage.getItem('currentUser')).user;
+		}
+		return false;
 	}
 }
