@@ -1,3 +1,5 @@
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from './../../Services/user/user.service';
 import { Account } from './../../_models/account';
 import { BalanceService } from './../../Services/balance.service';
@@ -11,11 +13,13 @@ export class Balance {};
   styleUrls: ['./accounts.component.css']
 })
 export class AccountsComponent implements OnInit {
+  acctForm: FormGroup;
   // I need balance
   balance:Balance;
   accounts:Account[];
   constructor(private balanceService: BalanceService,
-    private userService: UserService) {
+    private userService: UserService,
+    private router: Router) {
 
   }
 
@@ -35,6 +39,15 @@ export class AccountsComponent implements OnInit {
         }
       )
     
+  }
+
+  viewAccount( accountId:number ){
+
+    this.router.navigate(['accout-details']);
+  }
+
+  addAccount(){
+    this.router.navigate(['add-account']);
   }
 
 }

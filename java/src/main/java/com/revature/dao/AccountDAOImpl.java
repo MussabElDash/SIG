@@ -91,6 +91,7 @@ public class AccountDAOImpl implements AccountDAO{
 		
 		try {
 			t = s.beginTransaction();
+			log.info("Adding account [ " + a.toString() + " ]");
 			id = (Long) s.save(a);
 			t.commit();
 			log.info("Succesfully added new Account [ ID: " + id + " ]");

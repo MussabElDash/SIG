@@ -35,7 +35,8 @@ public class CreateAccountServlet extends HttpServlet {
 		a.setAccountType(request.getParameter("accountType"));
 		a.setAccountName(request.getParameter("accountName"));
 		a.setBalance(0.0);
-		a.setOwner((User)request.getSession().getAttribute("user"));
+		a.setOwner(LoginServlet.getLoggedUser(request));
+		System.out.println(a.getAccountType());
 		
 		if(adao.addAccount(a) != null) {
 			log.info("User [ " + u.getUsername() + " ] succesffully requested a new account [ Account ID: " + a.getId() + " ].");

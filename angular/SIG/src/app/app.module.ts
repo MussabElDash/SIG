@@ -16,6 +16,7 @@ import { OrdersComponent } from './Components/orders/orders.component';
 import { HomeComponent } from './Components/home/home.component';
 import { AccountdetailComponent } from './Components/accountdetail/accountdetail.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
+import { AddaccountComponent } from './Components/addaccount/addaccount.component';
 
 @NgModule({
 	declarations: [
@@ -27,6 +28,7 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 		HomeComponent,
 		AccountdetailComponent,
 		NavbarComponent,
+		AddaccountComponent,
 	],
 	imports: [
 		BrowserModule,

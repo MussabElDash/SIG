@@ -1,0 +1,19 @@
+<h2>ADD AN ACCOUNT</h2>
+<form [formGroup]="addaccountForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Account Name</label>
+        <input type="text" formControlName="accountName" class="form-control"/>
+  </div>
+
+  <div class="form-group">
+    <label for="username">Account Type</label>
+        <select formControlName="accountType" class="form-control">
+          <option value="Brokerage">Brokerage</option>
+          <option value="IRA">IRA</option>
+        </select> 
+  </div>
+
+  <div class="form-group">
+    <button [disabled]="loading" class="btn btn-primary">ADD ACCOUNT</button>
+  </div>
+</form>

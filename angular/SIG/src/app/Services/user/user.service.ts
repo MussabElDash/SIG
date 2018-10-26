@@ -43,17 +43,17 @@ export class UserService {
 
 	getAcctService(){
 
-		const httpOptions = {
-			headers: new HttpHeaders({
-				'Content-Type': 'application/x-www-form-urlencoded'
-			}),
-		};
+		// const httpOptions = {
+		// 	headers: new HttpHeaders({
+		// 		'Content-Type': 'application/x-www-form-urlencoded'
+		// 	}),
+		// };
 
 		let currentUser = this.authService.getCurrentUser;
 
 		if(currentUser){
 
-			return this.http.post<Account[]>("http://localhost:8085/SIG/GetUserAccountsServlet", currentUser)
+			return this.http.get<Account[]>("http://localhost:8085/SIG/GetUserAccountsServlet")
 			.pipe(map(userAccounts => {
 				console.log(userAccounts);
 				return userAccounts;
@@ -64,6 +64,31 @@ export class UserService {
 		}
 
 		
+	}
+
+	getDetAcct(){
+		return this.http.get<Account>("http://localhost:8085/SIG/ViewAccountServlet")
+		.pipe(map(account => {
+			console.log(account);
+			return account;
+		}))
+	}
+
+	addAccount(accountName: string, accountType: string){
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}),
+		};
+
+		let body = new HttpParams();
+		body = body.set('accountName', accountName);
+		body = body.set('accountType', accountType);
+
+
+		return this.http.post("http://localhost:8085/SIG/CreateAccountServlet",
+			body, httpOptions);
+
 	}
 
 
