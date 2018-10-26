@@ -72,8 +72,8 @@ CREATE TABLE securities(
 
 CREATE TABLE trades (
     trade_id NUMBER(38),
-    requester_account_id VARCHAR2 (100) NOT NULL,
-    receiver_account_id VARCHAR2 (100),
+    requester_account_id NUMBER(38) NOT NULL,
+    receiver_account_id NUMBER(38),
     broker_status NUMBER (1) DEFAULT 0,
     receiver_approval NUMBER (1) DEFAULT 0,
     security_id_requester NUMBER (38) NOT NULL,
