@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserService } from './../../Services/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,8 +13,10 @@ export class RegisterComponent implements OnInit {
 	loading = false;
 	submitted = false;
 
-	constructor(private formBuilder: FormBuilder,
-		private userService: UserService) { }
+	constructor(
+		private formBuilder: FormBuilder,
+		private userService: UserService,
+		private router: Router) { }
 
 	ngOnInit() {
 		this.registerForm = this.formBuilder.group({
@@ -47,10 +50,11 @@ export class RegisterComponent implements OnInit {
 			.subscribe(
 				data => {
 					//Route to login page
+					this.router.navigate(['/login']);
 				},
 				error => {
 					//Error logging in
-					//this.loading = false;
+					this.loading = false;
 				});
 
 	}

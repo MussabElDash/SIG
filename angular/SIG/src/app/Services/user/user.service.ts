@@ -38,7 +38,7 @@ export class UserService {
 	}
 
 	getAcctService(){
-		return this.http.get<Account[]>("http://localhost:8085/SIG/ViewAccountServlet")
+		return this.http.get<Account>("http://localhost:8085/SIG/ViewAccountServlet");
 	}
 
 

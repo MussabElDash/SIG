@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthenticationService } from './../../Services/auth/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private authenticationService: AuthenticationService) { }
+		private authenticationService: AuthenticationService,
+		private router: Router) { }
 
 	ngOnInit() {
 		this.loginForm = this.formBuilder.group({
@@ -30,16 +32,13 @@ export class LoginComponent implements OnInit {
 
 	onSubmit() {
 		this.submitted = true;
-		let t = this;
 		this.loading = true;
 		this.authenticationService.login(this.f.username.value, this.f.password.value)
 			.subscribe(
 				data => {
 					//Route to login page
-					console.log(data);
-					t.authenticationService.temp(data.token).subscribe(user => {
-						console.log(user);
-					});
+					this.router.navigate(['/accounts'])
+					
 				},
 				error => {
 					//Error logging in

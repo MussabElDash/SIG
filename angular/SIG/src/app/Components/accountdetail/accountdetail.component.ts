@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountdetailComponent implements OnInit {
 
-  accounts:Account[] = [];
+  account:Account;
   securitys:Security[] = [];
   
 
@@ -26,7 +26,7 @@ export class AccountdetailComponent implements OnInit {
     .getAcctService()
     .subscribe( 
       data =>{
-        this.accounts = data;
+        this.account = data;
       }, 
       error=>{ console.log("woops")});
   }
