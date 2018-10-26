@@ -44,7 +44,7 @@ export class AccountdetailComponent implements OnInit {
   }
 
   newOrder(){
-    this.router.navigate(['orders'])
+    this.router.navigate(['orders']);
   }
 
 }
