@@ -63,4 +63,13 @@ export class AuthenticationService {
 		// remove user from local storage to log user out
 		localStorage.removeItem('currentUser');
 	}
+
+	isLoggedIn() {
+		let currentUser = this.getCurrentUser();
+		return currentUser && currentUser.token;
+	}
+
+	getCurrentUser() {
+		return JSON.parse(localStorage.getItem('currentUser'));
+	}
 }
