@@ -206,3 +206,4 @@
     <servlet-name>FullyApproveTrade</servlet-name>
     <url-pattern>/FullyApproveTrade</url-pattern>
   </servlet-mapping>
+ </web-app>

@@ -39,6 +39,10 @@ public class FullyApproveTrade extends HttpServlet {
 		Security reqSec = t.getRequesterSecurity();
 		Security recSec = t.getReceiverSecutiy();
 		
+		log.info("Finalizing trade between Requestor [ " + requestor.getOwner().getUsername() + " ] and Receiver [ " + reciever.getOwner().getUsername() + " ]\n"
+				+"Requestor offer: " + reqSec.toString()+"\n"
+				+"Receiver offer: " + recSec.toString());
+		
 		boolean hasSec = false;
 		
 		for(Security sec : requestor.getSecurities()) {
