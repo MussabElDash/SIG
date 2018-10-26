@@ -1,5 +1,10 @@
+import { Account } from './../../_models/account';
+import { HttpHeaders } from '@angular/common/http';
+import { UserService } from './../../Services/user/user.service';
+import { Security } from './../../_models/security';
 
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-accountdetail',
@@ -8,11 +13,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountdetailComponent implements OnInit {
 
+  account:Account;
+  securitys:Security[] = [];
+  
+
   //securitys:Security[] = getAccountSecurities();
 
-  constructor() { }
+  constructor(private userService:UserService) { }
 
   ngOnInit() {
+    this.userService
+    .getAcctService()
+    .subscribe( 
+      data =>{
+        this.account = data;
+      }, 
+      error=>{ console.log("woops")});
   }
 
 }

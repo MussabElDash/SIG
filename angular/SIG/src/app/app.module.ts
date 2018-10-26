@@ -1,11 +1,12 @@
-import { HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './_interceptors/token-interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 
-// import { BalanceService } from './Services/balance.service';
+import { BalanceService } from './Services/balance/balance.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
@@ -36,7 +37,8 @@ FormsModule,
 ReactiveFormsModule,
 ],
 providers: [
-// BalanceService
+BalanceService,
+{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
 ],
 bootstrap: [
 AppComponent,

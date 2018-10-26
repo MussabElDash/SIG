@@ -1,3 +1,4 @@
+import { Account } from './../../_models/account';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -34,7 +35,10 @@ export class UserService {
 		return this.http.post("http://localhost:8085/SIG/RegistrationServlet",
 			body, httpOptions);
 
+	}
 
+	getAcctService(){
+		return this.http.get<Account>("http://localhost:8085/SIG/ViewAccountServlet");
 	}
 
 

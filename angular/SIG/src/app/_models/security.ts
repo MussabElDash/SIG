@@ -1,8 +1,9 @@
+import { AssetPricing } from "./assetpricing";
+
 export class Security {
     id: number;
-    name: string;
     type: string;
-    tickersymbol: string;
+    ap: AssetPricing;
     amount: number;
     price: number;
 }

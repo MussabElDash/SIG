@@ -50,10 +50,10 @@ export class AuthenticationService {
 				// login successful if there's a jwt token in the response
 				console.log(user.token);
 				console.log(user.user);
-				// if (user) {
-				// 	// store user details and jwt token in local storage to keep user logged in between page refreshes
-				// 	localStorage.setItem('currentUser', JSON.stringify(user));
-				// }
+				if (user) {
+					// 	store user details and jwt token in local storage to keep user logged in between page refreshes
+					localStorage.setItem('currentUser', JSON.stringify(user));
+				}
 
 				return user;
 			}));
@@ -66,10 +66,16 @@ export class AuthenticationService {
 
 	isLoggedIn() {
 		let currentUser = this.getCurrentUser();
-		return currentUser && currentUser.token;
+		if (currentUser) {
+			return true;
+		}
+		return false;
 	}
 
 	getCurrentUser() {
-		return JSON.parse(localStorage.getItem('currentUser'));
+		let stored = JSON.parse(localStorage.getItem('currentUser'));
+		if (stored && stored.token) {
+			return stored.user;
+		}
 	}
 }

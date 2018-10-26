@@ -1,5 +1,7 @@
-// import { BalanceService } from './../../Services/balance.service';
+import { BalanceService } from './../../Services/balance/balance.service';
 import { Component, OnInit } from '@angular/core';
+
+export class Balance {};
 
 @Component({
   selector: 'app-accounts',
@@ -8,11 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountsComponent implements OnInit {
   // I need balance
-  // constructor(private balanceService: BalanceService) {
+  balance: Balance;
+  constructor(private balanceService: BalanceService) {
 
-  // }
+   }
 
   ngOnInit() {
+    this.balanceService.getBalance()
+     .subscribe(
+      data => {
+        this.balance = data;
+      }
+
+    );
   }
 
 }

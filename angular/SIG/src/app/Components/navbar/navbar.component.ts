@@ -1,5 +1,6 @@
 import { AuthenticationService } from './../../Services/auth/authentication.service';
 import { Component, OnInit } from '@angular/core';
+// import { Router, Event, NavigationEnd } from '@angular/router';
 
 @Component({
 	selector: 'app-navbar',
@@ -8,13 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-	loggedIn = false;
-	userName = 'Guest';
-	constructor(private authenticationService: AuthenticationService) {
-		if (this.authenticationService.isLoggedIn()) {
+	constructor(private authenticationService: AuthenticationService, /*private router: Router*/) {
+		// this.router.events.subscribe((event: Event) => {
+		// 	if (event instanceof NavigationEnd) {
+		// 		this.triggerlogged();
+		// 	}
+		// });
+	}
+
+	userName() {
+		if (this.isLoggedIn()) {
 			let currentUser = this.authenticationService.getCurrentUser();
-			this.userName = `${currentUser.fname} ${currentUser.lname}`
+			return `${currentUser.fname} ${currentUser.lname}`;
+		} else {
+			return 'Guest';
 		}
+	}
+
+	isLoggedIn() {
+		return this.authenticationService.isLoggedIn();
+	}
+
+	logout() {
+		this.authenticationService.logout();
 	}
 
 	ngOnInit() {
