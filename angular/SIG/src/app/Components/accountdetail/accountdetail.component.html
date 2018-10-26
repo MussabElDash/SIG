@@ -1,31 +1,36 @@
 <div>
     <h1>ACCOUNT DETAILS</h1>
-    <h3>Account Securities:</h3>
+    <div *ngIf="securitys?.length == 0">
+        <h4>You have no Securities</h4>
+    </div>
+    <div *ngIf="securitys?.length > 0">
+        <h3>Account Securities:</h3>
+        <table class="table">
+            <thead>
+              <tr>
+                <th>NAME</th>
+                <th>TICKER SYMBOL</th>
+                <th>AMOUNT</th>
+                <th>PRICE</th>
+                <th>TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let security of securitys">
+                <td>{{security.name}}</td>
+                <td>{{security.tickersymbol}}</td>
+                <td>{{security.amount}}</td>
+                <td>{{security.price}}</td>
+                <td>{{security.price*security.amount}}</td>
+                <input type=button value="SELL" (click)="sellSecurity()">
+                <input type=button value="TRADE" (click)="newTrade()">
+              </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <table class="table">
-        <thead>
-          <tr>
-            <th>NAME</th>
-            <th>TYPE</th>
-            <th>TICKER SYMBOL</th>
-            <th>AMOUNT</th>
-            <th>PRICE</th>
-            <th>TOTAL</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let security of securitys">
-            <td>{{security.name}}</td>
-            <td>{{security.tickersymbol}}</td>
-            <td>{{security.amount}}</td>
-            <td>{{security.price}}</td>
-            <td>{{security.price*security.amount}}</td>
-            <input type=button value="SELL" (click)="sellSecurity()">
-            <input type=button value="TRADE" (click)="newTrade()">
-          </tr>
-        </tbody>
-      </table>
-
-    <input type=button value="MAKE NEW ORDER" (click)="newOrder()"><br>
+    
+    <br>
+    <input type=button value="MAKE NEW ORDER" (click)="newOrder()">
 
 </div>
