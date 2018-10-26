@@ -19,7 +19,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Entity // Marks the class as a persistent class
 @Table(name = "securities")
 // TODO ADD Security types
-@Check(constraints = "amount >= 0 AND security_type IN ('type1', 'type2', 'type3')")
+@Check(constraints = "amount >= 0 AND security_type IN ('Stock', 'Dollar')")
 public class Security {
 
 	@Id // Marks as a primary key
