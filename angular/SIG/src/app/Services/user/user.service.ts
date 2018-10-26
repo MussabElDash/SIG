@@ -66,8 +66,18 @@ export class UserService {
 		
 	}
 
-	getDetAcct(){
-		return this.http.get<Account>("http://localhost:8085/SIG/ViewAccountServlet")
+	getDetAcct(accountId:number){
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}),
+		};
+
+		let body = new HttpParams();
+		body = body.set('aid', accountId.toString());
+
+		return this.http.post<Account>("http://localhost:8085/SIG/ViewAccountServlet", body)
 		.pipe(map(account => {
 			console.log(account);
 			return account;

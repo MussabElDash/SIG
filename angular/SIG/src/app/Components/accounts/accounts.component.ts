@@ -17,6 +17,7 @@ export class AccountsComponent implements OnInit {
   // I need balance
   balance:Balance;
   accounts:Account[];
+  accountId:number;
   constructor(private balanceService: BalanceService,
     private userService: UserService,
     private router: Router,
@@ -47,8 +48,7 @@ export class AccountsComponent implements OnInit {
   }
 
   viewAccount( accountId:number ){
-
-    this.router.navigate(['accout-details']);
+    this.router.navigate(['account-details', accountId]);
   }
 
   addAccount(){
