@@ -1,5 +1,5 @@
 import { Balance } from './balance/balance';
-import { BalanceService } from './../../Services/balance.service';
+import { BalanceService } from '../../Services/balance/balance.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
