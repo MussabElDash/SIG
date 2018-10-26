@@ -141,7 +141,7 @@
 				<configuration>
 					<webResources>
 						<resource>
-							<directory>../Dist</directory>
+							<directory>../NgDist</directory>
 						</resource>
 					</webResources>
 				</configuration>
