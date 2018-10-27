@@ -50,6 +50,9 @@ public class GetUserAccountsServlet extends HttpServlet {
 		
 		if(userAccounts != null) {
 			log.info("User [ " + u.getUsername() + " ] accessing a list of all of their accounts.");
+			System.out.println(u.toString());
+			System.out.println(userAccounts.toString());
+			System.out.println(userAccounts.get(1).getOrders());
 		}
 		else {
 			log.error("User [ " + u.getUsername() + " ] attempted and failed to retrieve a list of all of their accounts.");

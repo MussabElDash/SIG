@@ -43,6 +43,8 @@ public class ViewAccountServlet extends HttpServlet {
 		
 		if(a != null) {
 			log.info("User  [ " + u.getUsername() + " ] successfully accessing account [ Account ID: " + a.getId() + " ]");	
+			log.info("account securities[ " + a.getSecurities() + " ]");
+			log.info("account orders[ " + a.getOrders() + " ]");
 		}
 		else {
 			log.error("User  [ " + u.getUsername() + " ] failed to access account [ Account ID: " + request.getParameter("aid") + " ]");
