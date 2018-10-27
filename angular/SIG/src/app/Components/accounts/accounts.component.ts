@@ -2,7 +2,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from './../../Services/user/user.service';
 import { Account } from './../../_models/account';
-import { BalanceService } from './../../Services/balance.service';
+import { BalanceService } from './../../Services/balance/balance.service';
 import { Component, OnInit } from '@angular/core';
 
 export class Balance { };
