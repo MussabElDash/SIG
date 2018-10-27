@@ -233,13 +233,4 @@
     <servlet-name>GetTradeByReciever</servlet-name>
     <url-pattern>/GetTradeByReciever</url-pattern>
   </servlet-mapping>
-  <filter>
-    <display-name>Ff</display-name>
-    <filter-name>Ff</filter-name>
-    <filter-class>com.revature.filters.Ff</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>Ff</filter-name>
-    <url-pattern>/Ff</url-pattern>
-  </filter-mapping>
 </web-app>
