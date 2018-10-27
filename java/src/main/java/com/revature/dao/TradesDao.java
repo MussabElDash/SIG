@@ -15,5 +15,6 @@ public interface TradesDao {
 	public List<Trade> selectTradesByReceiverAccount(Account a);
 	public boolean deleteTradesByTradeId(Trade delTrade);
 	public boolean updateTrades(Trade trades);
+	public List<Trade> selectAllTradesPendingBrokerApproval();
 
 }

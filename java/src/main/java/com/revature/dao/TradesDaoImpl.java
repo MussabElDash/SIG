@@ -212,5 +212,25 @@ public class TradesDaoImpl implements TradesDao {
 		
 		return trades;
 	}
+	
+	@Override
+	public List<Trade> selectAllTradesPendingBrokerApproval(){
+		List<Trade> trades = null;
+		Session session = HibernateUtil.getSession();
+		
+		try {
+			Query query = session.createQuery("FROM Trade WHERE brokerStatus = 0");
+			trades = query.list();
+			log.info("Successfully retrieved all Trades needing Broker approval");
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			log.error("FAILED to retrieve all Trades needing Broker approval");
+		}
+		finally {
+			session.close();
+		}
+		
+		return trades;
+	}
 
 }
