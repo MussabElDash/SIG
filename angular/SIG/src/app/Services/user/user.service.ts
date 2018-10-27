@@ -36,7 +36,7 @@ export class UserService {
 		body = body.set('dob', dob.toString());
 		body = body.set('phone', phone.toString());
 
-		return this.http.post("http://localhost:8085/SIG/RegistrationServlet",
+		return this.http.post("RegistrationServlet",
 			body, httpOptions);
 
 	}
@@ -53,7 +53,7 @@ export class UserService {
 
 		if(currentUser){
 
-			return this.http.get<Account[]>("http://localhost:8085/SIG/GetUserAccountsServlet")
+			return this.http.get<Account[]>("GetUserAccountsServlet")
 			.pipe(map(userAccounts => {
 				console.log(userAccounts);
 				return userAccounts;
@@ -77,7 +77,7 @@ export class UserService {
 		let body = new HttpParams();
 		body = body.set('aid', accountId.toString());
 
-		return this.http.post<Account>("http://localhost:8085/SIG/ViewAccountServlet", body)
+		return this.http.post<Account>("ViewAccountServlet", body)
 		.pipe(map(account => {
 			console.log(account);
 			return account;
@@ -96,7 +96,7 @@ export class UserService {
 		body = body.set('accountType', accountType);
 
 
-		return this.http.post("http://localhost:8085/SIG/CreateAccountServlet",
+		return this.http.post("CreateAccountServlet",
 			body, httpOptions);
 
 	}

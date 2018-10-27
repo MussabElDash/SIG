@@ -11,7 +11,7 @@ export class InvestmentService {
 
   getTickerPrices(){
     
-    return this.http.get<AssetPricing[]>("http://localhost:8085/SIG/GetAssetPricingServlet");
+    return this.http.get<AssetPricing[]>("GetAssetPricingServlet");
   }
 
   makeOrder(ticker: string, aid: number, quant: number){
@@ -27,7 +27,7 @@ export class InvestmentService {
     body = body.set('amount', quant.toString());
     
     console.log(body);
-    return this.http.post("http://localhost:8085/SIG/NewOrderServlet",
+    return this.http.post("NewOrderServlet",
 			body, httpOptions);
   }
 }
