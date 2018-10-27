@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 
-import { BalanceService } from './Services/balance.service';
+import { BalanceService } from './Services/balance/balance.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';

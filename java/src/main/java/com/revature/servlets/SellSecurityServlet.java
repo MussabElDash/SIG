@@ -60,7 +60,7 @@ public class SellSecurityServlet extends HttpServlet {
 		else {
 			Security dollarSec = new Security();
 			
-			dollarSec.setType("Cash");
+			dollarSec.setType("Dollar");
 			dollarSec.setAp(ap);
 			dollarSec.setAmount((int)(s.getAmount()*s.getAp().getPrice()));
 			dollarSec.setOwnerAccount(a);

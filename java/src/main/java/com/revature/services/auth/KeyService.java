@@ -33,8 +33,12 @@ public class KeyService {
 //	}
 
 	public KeyService() {
+		genKey();
+	}
+
+	private byte[] genKey() {
 		if (encodedKey != null) {
-			return;
+			return encodedKey;
 		}
 //		generate 256-bit AES key
 		KeyGenerator generator;
@@ -43,14 +47,16 @@ public class KeyService {
 			generator.init(256);
 			SecretKey key = generator.generateKey();
 			// get the key in encoded format
-			encodedKey = key.getEncoded();
+			return encodedKey = key.getEncoded();
 		} catch (NoSuchAlgorithmException e) {
 			LogInterface.logStackTrace(e);
 		}
+		return null;
+
 	}
 
 	public byte[] getEncodedKey() {
-		return encodedKey;
+		return genKey();
 	}
 
 }
