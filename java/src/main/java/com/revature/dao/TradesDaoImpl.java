@@ -59,7 +59,7 @@ public class TradesDaoImpl implements TradesDao {
 		Trade trades = null;
 
 		try {
-			Query query = session.createQuery("FROM Trade WHERE tradeId = :givenId");
+			Query query = session.createQuery("FROM Trade WHERE id = :givenId");
 			query.setParameter("givenId", tradeId);
 			trades = (Trade) query.uniqueResult();
 			log.info("Successfully retrieved Trade from the DB. [ ID: " + tradeId + " ]");

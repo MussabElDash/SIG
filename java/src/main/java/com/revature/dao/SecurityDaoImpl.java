@@ -180,5 +180,32 @@ public class SecurityDaoImpl implements SecurityDao{
 		
 		return securities;
 	}
+	
+	@Override
+	public boolean removeSecurity(Security sec) {
+		
+		Session s = HibernateUtil.getSession();
+		Transaction t = null;
+		
+		try {			
+			t = s.beginTransaction();
+			s.delete(sec);
+			t.commit();
+			log.info("Succesfully removed Security [ ID: " + sec.getId() + " ]");
+			return true;			
+		}
+		catch(HibernateException e) {
+			e.printStackTrace();
+			t.rollback();
+			log.info("FAILED to remove Security [ ID: " + sec.getId() + " ]");
+			return false;
+		}
+		finally {
+			s.close();
+		}
+		
+	}
+	
+	
 
 }
