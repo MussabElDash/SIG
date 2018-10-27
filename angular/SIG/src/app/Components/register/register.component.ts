@@ -42,7 +42,11 @@ export class RegisterComponent implements OnInit {
 	onSubmit() {
 		this.submitted = true;
 
+		if (this.registerForm.invalid || !this.passwordMatch()) {
+			return;
+		}
 		this.loading = true;
+
 		this.userService.register(this.f.username.value, this.f.password1.value,
 			this.f.fname.value, this.f.lname.value, this.f.address.value, this.f.city.value,
 			this.f.state.value, this.f.zip.value, this.f.ssn.value, this.f.dob.value,
@@ -57,5 +61,9 @@ export class RegisterComponent implements OnInit {
 					this.loading = false;
 				});
 
+	}
+
+	passwordMatch(): boolean {
+		return this.f.password1.value === this.f.password2.value;
 	}
 }
