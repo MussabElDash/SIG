@@ -21,7 +21,7 @@ import com.revature.beans.User;
  * parameter.
  */
 public class HibernateUtil {
-	private static SessionFactory sessionFactory = createSessionFactory();
+	private static SessionFactory sessionFactory = null;
 
 	private static SessionFactory createSessionFactory() {
 		AssetPricingScheduler.Start();
