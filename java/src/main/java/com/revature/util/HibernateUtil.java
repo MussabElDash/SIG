@@ -29,7 +29,10 @@ public class HibernateUtil {
 			return sessionFactory;
 		}
 		Configuration configuration = new Configuration();
-		configuration.configure();
+		configuration.configure("hibernate.cfg.xml");
+		configuration.setProperty("hibernate.connection.url", System.getenv("DATABASE_URL"));
+		configuration.setProperty("hibernate.connection.username", "DATABASE_USERNAME");
+		configuration.setProperty("hibernate.connection.password", "DATABASE_PASSWORD");
 		// ADDing The Mapping Here
 		configuration.addAnnotatedClass(Account.class);
 		configuration.addAnnotatedClass(User.class);
