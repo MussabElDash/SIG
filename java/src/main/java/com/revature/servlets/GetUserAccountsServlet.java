@@ -50,6 +50,8 @@ public class GetUserAccountsServlet extends HttpServlet {
 		
 		if(userAccounts != null && !userAccounts.isEmpty()) {
 			log.info("User [ " + u.getUsername() + " ] accessing a list of all of their accounts.");
+			System.out.println(u.toString());
+			System.out.println(userAccounts.toString());
 		}
 		else {
 			log.error("User [ " + u.getUsername() + " ] attempted and failed to retrieve a list of all of their accounts.");

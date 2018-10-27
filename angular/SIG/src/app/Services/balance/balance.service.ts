@@ -24,7 +24,7 @@ export class BalanceService {
 
 		if (currentUser) {
 
-			return this.http.post<Balance>("http://localhost:8085/SIG/GetAccountTotalsServlet", currentUser.user)
+			return this.http.post<Balance>("GetAccountTotalsServlet", currentUser.user)
 				.pipe(map(amount => {
 					console.log(amount);
 					return amount;

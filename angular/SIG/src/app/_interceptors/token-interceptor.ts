@@ -18,7 +18,13 @@ export class TokenInterceptor implements HttpInterceptor {
 
 		console.log("interceptor activated");
 		// add authorization header with jwt token if available
-		let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        //let url = "http://localhost:8085/SIG/";
+        let url = "http://18.191.230.71:8085/SIG/";
+        request = request.clone({
+            url: url + request.url
+        });
+
 
 		if (currentUser && currentUser.token) {
 

@@ -1,3 +1,4 @@
+import { Order } from './orders';
 import { Security } from 'src/app/_models/security';
 import { User } from "./user";
 
@@ -8,4 +9,5 @@ export class Account {
     balance: number;
     owner: User;
     securities: Security[];
+    orders: Order[];
 }

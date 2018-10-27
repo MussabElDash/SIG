@@ -38,13 +38,13 @@ export class AccountdetailComponent implements OnInit {
     .subscribe( 
       data =>{
         this.account = data;
-        this.securitys = data.securities;
+        //this.securitys = data.securities;
       }, 
       error=>{ console.log("whoops")});
   }
 
   newOrder(){
-    this.router.navigate(['orders']);
+    this.router.navigate(['orders', this.accountId]);
   }
 
 }

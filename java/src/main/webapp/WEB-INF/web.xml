@@ -236,4 +236,14 @@
 		<servlet-name>GetTradeByReciever</servlet-name>
 		<url-pattern>/GetTradeByReciever</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>GetAssetPricingServlet</display-name>
+		<servlet-name>GetAssetPricingServlet</servlet-name>
+		<servlet-class>com.revature.servlets.GetAssetPricingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetAssetPricingServlet</servlet-name>
+		<url-pattern>/GetAssetPricingServlet</url-pattern>
+	</servlet-mapping>
 </web-app>
