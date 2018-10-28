@@ -28,7 +28,7 @@ export class AuthenticationService {
 				'jwt-auth-token': token,
 			}),
 		}
-		return this.http.post<any>('http://localhost:8085/SIG/ViewAccountServlet', {}, options)
+		return this.http.post<any>('ViewAccountServlet', {}, options)
 			.pipe(map(user => {
 				console.log(user);
 				return user;
@@ -46,7 +46,7 @@ export class AuthenticationService {
 		body = body.set('password', password);
 
 		//Have response return user with username and jwt token
-		return this.http.post<UserToken>('http://localhost:8085/SIG/LoginServlet', body, this.httpOptions)
+		return this.http.post<UserToken>('LoginServlet', body, this.httpOptions)
 			.pipe(map(user => {
 
 				// login successful if there's a jwt token in the response
