@@ -18,8 +18,6 @@ public class AssetPricing {
 
 	@Id
 	@Column(name = "ticker_symbol")
-	@SequenceGenerator(sequenceName = "ticker_seq", name = "ticker_seq")
-	@GeneratedValue(generator = "ticker_seq", strategy = GenerationType.SEQUENCE)
 	private String tickerSymbol;
 
 	@Column(name = "company_name")

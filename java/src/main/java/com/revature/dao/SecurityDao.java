@@ -12,4 +12,5 @@ public interface SecurityDao {
 	public boolean updateSecurity(Security s);
 	public void removeSecurityById(Long id);
 	public List<Security> getSecuritiesByAccount(Account acct);
+	public boolean removeSecurity(Security sec);
 }
