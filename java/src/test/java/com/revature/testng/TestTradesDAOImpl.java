@@ -155,8 +155,8 @@ public class TestTradesDAOImpl {
 	
 	@AfterClass
 	public void removeObjects () {
-		sdao.removeSecurity(Reqsec);
-		sdao.removeSecurity(Recsec);
+		sdao.removeSecurityById(Reqsec.getId());
+		sdao.removeSecurityById(Recsec.getId());
 		adao.removeAccount(Reqacct);
 		adao.removeAccount(Recacct);
 		udao.removeUser(Requser);
