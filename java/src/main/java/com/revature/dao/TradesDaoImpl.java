@@ -59,7 +59,7 @@ public class TradesDaoImpl implements TradesDao {
 		Trade trades = null;
 
 		try {
-			Query query = session.createQuery("FROM Trade WHERE id = :givenId");
+			Query query = session.createQuery("FROM Trade WHERE tradeId = :givenId");
 			query.setParameter("givenId", tradeId);
 			trades = (Trade) query.uniqueResult();
 			log.info("Successfully retrieved Trade from the DB. [ ID: " + tradeId + " ]");
@@ -205,6 +205,26 @@ public class TradesDaoImpl implements TradesDao {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			log.error("FAILED to retrieve all Trades belonging to RECIEVER Account [ Account ID: " + a.getId() + " ]");
+		}
+		finally {
+			session.close();
+		}
+		
+		return trades;
+	}
+	
+	@Override
+	public List<Trade> selectAllTradesPendingBrokerApproval(){
+		List<Trade> trades = null;
+		Session session = HibernateUtil.getSession();
+		
+		try {
+			Query query = session.createQuery("FROM Trade WHERE brokerStatus = 0");
+			trades = query.list();
+			log.info("Successfully retrieved all Trades needing Broker approval");
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			log.error("FAILED to retrieve all Trades needing Broker approval");
 		}
 		finally {
 			session.close();

@@ -129,7 +129,7 @@ public class OrderDaoImpl  implements OrderDao{
 	 * given its unique ID.
 	 */
 	@Override
-	public void removeOrderById(Long id) {
+	public boolean removeOrderById(Long id) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		
@@ -140,10 +140,11 @@ public class OrderDaoImpl  implements OrderDao{
 			
 			tx.commit();
 			log.info("Successfully removed Order from DB [ ID: " + id + " ]");
-			
+			return true;
 		} catch (HibernateException e) {
 			tx.rollback();
 			log.error("FAILED to remove Order from DB [ ID: " + id + " ]");
+			return false;
 		} finally {
 			session.close();
 		}
@@ -163,7 +164,7 @@ public class OrderDaoImpl  implements OrderDao{
 		
 		try {
 			
-			Query query = session.createQuery("FROM Security WHERE OwnerAccount = :givenAcct");
+			Query query = session.createQuery("FROM Security WHERE ownerAccount = :givenAcct");
 			query.setParameter("givenAcct", acct);
 			
 			orders = query.list();

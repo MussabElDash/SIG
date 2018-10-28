@@ -23,6 +23,7 @@ public class AssetPricingDaoImpl implements AssetPricingDao {
 	 * if insert succeeds. Returns NULL if the insertion fails.
 	 */
 	public boolean insertAssetPricing(AssetPricing assetPricing) {
+		
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		
@@ -30,8 +31,7 @@ public class AssetPricingDaoImpl implements AssetPricingDao {
 			tx = session.beginTransaction();
 			session.save(assetPricing);
 			tx.commit();
-			log.info("New Asset Pricing successfully added into the DB [ Ticker: " + assetPricing.getTickerSymbol() + " ]");
-			return true;
+			log.info("New Asset Pricing successfully added into the DB [ ID: " + assetPricing.getTickerSymbol() + " ]");
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			tx.rollback();
@@ -41,6 +41,7 @@ public class AssetPricingDaoImpl implements AssetPricingDao {
 			session.close();
 		}
 
+		return true;
 	}
 
 	/**
@@ -115,6 +116,31 @@ public class AssetPricingDaoImpl implements AssetPricingDao {
 		} finally {
 			session.close();
 		}
+	}
+	
+	public boolean removeAssetPricing(AssetPricing assetPricing) {
+		
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.delete(assetPricing);
+			
+			tx.commit();
+			
+			log.info("Successfully removed Asset Pricing from DB [ Ticker: " + assetPricing.getTickerSymbol() + " ]");
+		
+			return true;
+		} catch (HibernateException e) {
+			tx.rollback();
+			log.error("Failed to remove Asset Pricing from DB [ Ticker: " + assetPricing.getTickerSymbol() + " ]");
+			return false;
+		} finally {
+			session.close();
+		}
+		
 	}
 
 	/**

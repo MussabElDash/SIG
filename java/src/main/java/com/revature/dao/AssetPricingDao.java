@@ -11,5 +11,6 @@ public interface AssetPricingDao {
 	public List<AssetPricing> selectAllAssetPricings();
 	public boolean deleteAssetPricingByTickerSymbol(String tickerSymbol);
 	public boolean updateAssetPricing(AssetPricing assetPricing);
+	public boolean removeAssetPricing(AssetPricing assetPricing);
 
 }

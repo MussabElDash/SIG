@@ -87,7 +87,7 @@ public class TestAccountDAOImpl {
   
   @Test( dependsOnMethods = { "testAddAccount" })
   public void testGetAccount() {
-	  
+
 	  assertNotNull(adao.getAccount(id));
 	  
   }
@@ -115,7 +115,7 @@ public class TestAccountDAOImpl {
 	  assertEquals(a.getBalance(), 110.01);
   }
   
-  @Test( dependsOnMethods = {"testAddAccount","testUpdateAccount","verifyUpdate"})
+  @Test( dependsOnMethods = {"testAddAccount","testUpdateAccount","verifyUpdate","testGetAccount"})
   public void testRemoveAccount() {
 	  
 	  a = adao.getAccount(id);
