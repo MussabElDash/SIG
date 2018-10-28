@@ -2,7 +2,6 @@ package com.revature.test.Authentication;
 
 import static org.testng.Assert.assertTrue;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,10 +9,11 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class RegisterTest {
@@ -24,13 +24,14 @@ public class RegisterTest {
 
 	public RegisterTest() {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
-		driver = new ChromeDriver();
-//		driver = new HtmlUnitDriver(BrowserVersion.CHROME);
-//		url = "http://52.14.64.242:8085/SIG";
+		ChromeOptions chromeOptions = new ChromeOptions();
+//		chromeOptions.addArguments("--headless");
+		driver = new ChromeDriver(chromeOptions);
+//		 url = "http://52.14.64.242:8085/SIG";
 		url = "localhost:4200";
 	}
 
-	@BeforeTest
+	@BeforeMethod
 	public void setUp() {
 		driver.get(url);
 		elements = new ArrayList<WebElement>();
@@ -46,88 +47,82 @@ public class RegisterTest {
 		elements.add(driver.findElement(By.cssSelector("app-register input[formcontrolname=ssn]")));
 		elements.add(driver.findElement(By.cssSelector("app-register input[formcontrolname=dob]")));
 		elements.add(driver.findElement(By.cssSelector("app-register input[formcontrolname=phone]")));
+
+		elements.get(0).sendKeys(randString());
+		elements.get(1).sendKeys("pass");
+		elements.get(2).sendKeys("pass");
+		elements.get(3).sendKeys("fname");
+		elements.get(4).sendKeys("lname");
+		elements.get(5).sendKeys("some address");
+		elements.get(6).sendKeys("some city");
+		elements.get(7).sendKeys("as");
+		elements.get(8).sendKeys("11111");
+		elements.get(9).sendKeys("111111111");
+		elements.get(10).sendKeys("11112018");
+		elements.get(11).sendKeys("1111111111");
 	}
 
-	@Test(priority = 1)
+	@Test
 	public void registerFormAvailable() {
 		WebElement form = driver.findElement(By.cssSelector("app-register form"));
 		assertTrue(form.isDisplayed(), "The Registration Form should be visible");
 	}
 
-	@Test(priority = 2)
-	public void failedRegistrations() {
-		int random = (int) (Math.random() * 10);
-		while (random-- > 0) {
-			List<WebElement> ign = getRandomElems();
-			int i = 0;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys(randString());
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("pass");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("pass");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("fname");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("lname");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("some address");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("some city");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("as");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("11111");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("111111111");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("11112018");
-			}
-			i++;
-			elements.get(i).clear();
-			if (!ign.contains(elements.get(i))) {
-				elements.get(i).sendKeys("1111111111");
-			}
-			driver.findElement(By.cssSelector("app-register button")).click();
-			WebElement button = (new WebDriverWait(driver, 10))
-					.until(ExpectedConditions.elementToBeClickable(By.cssSelector("app-register button")));
-			assertTrue(button.isEnabled(), "The register button should be enabled after unsuccessful register");
-
-		}
+	@Test
+	public void notMatchingPass() {
+		elements.get(2).clear();
+		elements.get(2).sendKeys("pass1");
+		driver.findElement(By.cssSelector("app-register button")).click();
+		wait(500);
+		WebElement button = (new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.elementToBeClickable(By.cssSelector("app-register button")));
+		assertTrue(button.isEnabled(), "The register button should be enabled after unsuccessful register");
 	}
 
-	@AfterTest
+	int wrong = 0;
+
+	@Test(invocationCount = 5)
+	public void wrongFieldLenght() {
+		ArrayList<WebElement> wrngs = new ArrayList<WebElement>();
+		wrngs.add(elements.get(7));
+		wrngs.add(elements.get(8));
+		wrngs.add(elements.get(9));
+		wrngs.add(elements.get(10));
+		wrngs.add(elements.get(11));
+		WebElement elem = wrngs.get(wrong++);
+		elem.clear();
+		elem.sendKeys("11111111111");
+		wait(500);
+		driver.findElement(By.cssSelector("app-register button")).click();
+		wait(500);
+		WebElement button = (new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.elementToBeClickable(By.cssSelector("app-register button")));
+		assertTrue(button.isEnabled(), "The register button should be enabled after unsuccessful register");
+	}
+
+	@Test(invocationCount = 5)
+	public void failedRegistrations() {
+		List<WebElement> ign = getRandomElems();
+		for (WebElement elem : ign) {
+			elem.clear();
+		}
+		wait(500);
+		driver.findElement(By.cssSelector("app-register button")).click();
+		wait(500);
+		WebElement button = (new WebDriverWait(driver, 10))
+				.until(ExpectedConditions.elementToBeClickable(By.cssSelector("app-register button")));
+		assertTrue(button.isEnabled(), "The register button should be enabled after unsuccessful register");
+	}
+
+	@Test
+	public void registerSuccessfuly() {
+		driver.findElement(By.cssSelector("app-register button")).click();
+		wait(500);
+		WebElement login = waitForElem(By.cssSelector("router-outlet+app-login"));
+		assertTrue(login.isDisplayed(), "The Login Form should be visible");
+	}
+
+	@AfterClass
 	public void tearDownClass() {
 		driver.quit();
 	}
@@ -136,7 +131,7 @@ public class RegisterTest {
 		ArrayList<WebElement> elems = new ArrayList<WebElement>();
 		Random rand = new Random();
 		int ran = rand.nextInt(elements.size());
-		while (ran == 0) {
+		while (ran < 3) {
 			ran = rand.nextInt(elements.size());
 		}
 		while (ran-- > 0) {
@@ -150,13 +145,21 @@ public class RegisterTest {
 	}
 
 	public String randString() {
-		byte[] array = new byte[7]; // length is bounded by 7
-		new Random().nextBytes(array);
-		String generatedString = new String(array, Charset.forName("UTF-8"));
-		return generatedString;
+		String res = "";
+		for (int i = 0; i < 8; i++) {
+			res += (char) (new Random().nextInt(58) + 65);
+		}
+		return res;
 	}
 
 	public WebElement waitForElem(By locator) {
 		return (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
+
+	private void wait(int i) {
+		try {
+			Thread.sleep(i);
+		} catch (Exception e) {
+		}
 	}
 }

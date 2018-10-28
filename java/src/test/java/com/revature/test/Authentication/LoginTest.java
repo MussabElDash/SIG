@@ -6,25 +6,30 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class LoginTest {
-	ChromeDriver driver;
+	WebDriver driver;
 	String url;
 
 	public LoginTest() {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
-		driver = new ChromeDriver();
-		url = "http://18.191.230.71:8085/SIG";
+		ChromeOptions chromeOptions = new ChromeOptions();
+		chromeOptions.addArguments("--headless");
+		driver = new ChromeDriver(chromeOptions);
+//		url = "http://52.14.64.242:8085/SIG";
+		url = "http://localhost:4200";
 	}
 
-	@BeforeTest
+	@BeforeClass
 	public void setUp() {
 		driver.get(url);
 	}
@@ -113,7 +118,7 @@ public class LoginTest {
 		}
 	}
 
-	@AfterTest
+	@AfterClass
 	public void tearDownClass() {
 		driver.quit();
 	}
