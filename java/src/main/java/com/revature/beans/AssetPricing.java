@@ -2,10 +2,7 @@ package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Check;
@@ -18,8 +15,6 @@ public class AssetPricing {
 
 	@Id
 	@Column(name = "ticker_symbol")
-	@SequenceGenerator(sequenceName = "ticker_seq", name = "ticker_seq")
-	@GeneratedValue(generator = "ticker_seq", strategy = GenerationType.SEQUENCE)
 	private String tickerSymbol;
 
 	@Column(name = "company_name")

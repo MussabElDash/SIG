@@ -17,6 +17,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { AccountdetailComponent } from './Components/accountdetail/accountdetail.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { AddaccountComponent } from './Components/addaccount/addaccount.component';
+import { TradesComponent } from './Components/trades/trades.component';
 
 @NgModule({
 	declarations: [
@@ -29,6 +30,7 @@ import { AddaccountComponent } from './Components/addaccount/addaccount.componen
 		AccountdetailComponent,
 		NavbarComponent,
 		AddaccountComponent,
+		TradesComponent,
 	],
 	imports: [
 		BrowserModule,
