@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
 		// add authorization header with jwt token if available
 		let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 		// let url = "http://localhost:8085/SIG/";
-		let url = "http://52.14.64.242:8085/SIG/";
+		let url = "http://3.16.36.61:8085/SIG/";
 		request = request.clone({
 			url: url + request.url
 		});
