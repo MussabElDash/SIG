@@ -17,8 +17,6 @@ import com.revature.dao.AccountDAO;
 import com.revature.dao.AccountDAOImpl;
 import com.revature.dao.TradesDao;
 import com.revature.dao.TradesDaoImpl;
-import com.revature.dao.UserDAO;
-import com.revature.dao.UserDAOImpl;
 import com.revature.util.JsonUtil;
 import com.revature.util.LogInterface;
 

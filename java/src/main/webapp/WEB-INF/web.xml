@@ -247,13 +247,13 @@
 		<url-pattern>/GetAssetPricingServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
-    <description></description>
-    <display-name>GetAllTradesPendingBroker</display-name>
-    <servlet-name>GetAllTradesPendingBroker</servlet-name>
-    <servlet-class>com.revature.servlets.GetAllTradesPendingBroker</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetAllTradesPendingBroker</servlet-name>
-    <url-pattern>/GetAllTradesPendingBroker</url-pattern>
-  </servlet-mapping>
+		<description></description>
+		<display-name>GetAllTradesPendingBroker</display-name>
+		<servlet-name>GetAllTradesPendingBroker</servlet-name>
+		<servlet-class>com.revature.servlets.GetAllTradesPendingBroker</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetAllTradesPendingBroker</servlet-name>
+		<url-pattern>/GetAllTradesPendingBroker</url-pattern>
+	</servlet-mapping>
 </web-app>
