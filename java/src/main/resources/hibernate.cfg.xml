@@ -40,7 +40,7 @@
 			from scratch, then promptly destroyed once server is shutdown. -->
 
 		<property name="hibernate.hbm2ddl.auto">
-			update
+			none
 		</property>
 
 	</session-factory>
