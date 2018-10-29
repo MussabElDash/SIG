@@ -10,6 +10,6 @@ public interface OrderDao {
 	public List<Order> getAllOrders();
 	public Order selectOrderById(Long id);
 	public boolean updateOrder(Order s);
-	public void removeOrderById(Long id);
+	public boolean removeOrderById(Long id);
 	public List<Order> getOrdersByAccount(Account acct);
 }

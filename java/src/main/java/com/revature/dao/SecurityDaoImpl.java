@@ -80,7 +80,7 @@ public class SecurityDaoImpl implements SecurityDao{
 		try {
 			
 			Query query = session.createQuery("FROM Security WHERE id = :givenId");
-			query.setParameter("givenId", id);
+			query.setParameter("givenId", id.longValue());
 			s = (Security) query.uniqueResult();
 			log.info("Successfully retrieved Security from DB [ ID: " + id + " ]");
 			
@@ -128,7 +128,7 @@ public class SecurityDaoImpl implements SecurityDao{
 	 * instance from the DB by its ID.
 	 */
 	@Override
-	public void removeSecurityById(Long id) {
+	public boolean removeSecurityById(Long id) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		
@@ -139,11 +139,12 @@ public class SecurityDaoImpl implements SecurityDao{
 			
 			tx.commit();
 			log.info("Successfully removed Security from the DB [ ID: " + id + " ]");
-			
+			return true;
 		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
 			log.error("FAILED to remove Security from the DB [ ID: " + id + " ]");
+			return false;
 		} finally {
 			session.close();
 		}

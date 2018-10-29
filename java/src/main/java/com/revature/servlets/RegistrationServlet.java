@@ -20,17 +20,19 @@ import java.sql.Date;
  */
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		Logger log = LogInterface.logger;
-		
+
 		UserDAO udao = new UserDAOImpl();
 		User u = new User();
-		
+
 		u.setUsername(request.getParameter("username"));
 		u.setPass(request.getParameter("pass"));
 		u.setFname(request.getParameter("fname"));
@@ -44,14 +46,14 @@ public class RegistrationServlet extends HttpServlet {
 		u.setDateOfBirth(dob);
 		u.setPhone(Integer.parseInt(request.getParameter("phone")));
 		u.setApprovalFlag(0);
-		
-		if(udao.addUser(u)) {
+
+		if (udao.addUser(u)) {
 			log.info("New user [ " + u.getUsername() + " ] successfully added.");
-		}
-		else {
+		} else {
 			log.error("Failed to add new user [ " + u.getUsername() + " ]");
+			response.sendError(400);
 		}
-		
+
 	}
 
 }
