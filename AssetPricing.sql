@@ -1,3 +1,4 @@
+INSERT INTO asset_pricing (ticker_symbol, price, company_name) VALUES ('Dollar', 1, 'US');
 --INSERT INTO asset_pricing (ticker_symbol, company_name) VALUES ('YI', '111');
 --INSERT INTO asset_pricing (ticker_symbol, company_name) VALUES ('PIH', '1347 Property Insurance Holdings');
 --INSERT INTO asset_pricing (ticker_symbol, company_name) VALUES ('PIHPP', '1347 Property Insurance Holdings');

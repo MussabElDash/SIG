@@ -3,39 +3,76 @@
 </div>
 
 <div class="card text-center">
-  <h5 class="card-header">Brokerage ...7844</h5>
+  <div *ngIf="account">
+      <h5 class="card-header">{{account.accountName}}</h5>
+  </div>
   <div class="card-body">
     <h6 class="card-title">Available Cash: $50,000,000.00</h6>
   </div>
 </div>
 
-
 <form style="text-align: center;">
   <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="inputTransactionType">Transaction Type</label>
-      <select id="inputTransactionType" class="form-control">
-        <option selected>Stocks/ETFs</option>
-        <option>Mutual Funds</option>
-        <option>Bonds</option>
+    <div class="form-group col-md-6">
+      <label for="inputTransactionType">Search By:</label>
+      <select (change)="selectSearchHandler($event)" id="inputTransactionType" class="form-control">
+        <option selected value="ticker">Ticker Symbol</option>
+        <option value="name">Name</option>
       </select>
     </div>
-    <div class="form-group col-md-4">
-      <label for="inputSymbol">Symbol</label>
-      <input type="text" class="form-control" id="inputSymbol">
+    <div class="form-group col-md-6">
+      <label for="inputSymbol">Search:</label>
+      <input (keyup)="displaySearch($event)" type="text" class="form-control" id="inputSymbol">
     </div>
   </div>
-  <div class="card text-center">
-    <div class="card-header">
-      GOOG
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">1,103</h5>
-    </div>
-    <div class="card-footer text-muted">
-      Volume 2.00M
+
+  <div *ngIf="searchOption === 'ticker' && searchVal">
+    <div *ngFor="let ap of assetPricings">
+      <div *ngIf="ap.tickerSymbol.startsWith(searchVal)">
+          <div class="card text-center">
+              <div class="card-header">({{ap.tickerSymbol}}) {{ap.companyName}}</div>
+              <div class="card-body">
+                <h5 class="card-title">{{ap.price}}</h5>
+              </div>
+              <form [formGroup]="orderForm" (ngSubmit)="newOrder(ap.tickerSymbol)">
+                  <div class="form-row card-footer text-muted">
+                    <div class="form-group">
+                        <label for="quantity">Quantity: </label>
+                            <input type="number" formControlName="quantity" class="form-control"/>
+                    </div>
+                    <button class="btn btn-primary">ORDER</button>
+                  </div>
+                </form>
+            </div>
+      </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Place Order</button>
-  <a href="#" class="btn btn-primary">Place Order</a>
+
+  <div *ngIf="searchOption === 'name' && searchVal">
+      <div *ngFor="let ap of assetPricings">
+          <div *ngIf="ap.companyName.toUpperCase().startsWith(searchVal)">
+              <div class="card text-center">
+                  <div class="card-header">({{ap.tickerSymbol}})   {{ap.companyName}}</div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ap.price}}</h5>
+                  </div>
+                  <form [formGroup]="orderForm" (ngSubmit)="newOrder(ap.tickerSymbol)">
+                      <div class="form-row card-footer text-muted">
+                        <div class="form-group">
+                            <label for="quantity">Quantity: </label>
+                                <input type="text" formControlName="quantity" class="form-control"/>
+                        </div>
+                        <button class="btn btn-primary">ORDER</button>
+                      </div>
+                    </form>
+                </div>
+          </div>
+        </div>
+  </div>
 </form>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

@@ -21,8 +21,12 @@ import com.revature.services.AssetPricingService;
 
 public class AssetPricingScheduler extends TimerTask implements LogInterface {
 
-	static {
-		new AssetPricingScheduler();
+	private static AssetPricingScheduler schedule;
+
+	public static void Start() {
+		if (schedule == null) {
+			schedule = new AssetPricingScheduler();
+		}
 	}
 
 	private Timer time = new Timer();

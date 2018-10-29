@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Check;
 import org.hibernate.annotations.ColumnDefault;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "accounts")
 // TODO ADD account types in here
@@ -42,16 +44,20 @@ public class Account {
 	@ManyToOne
 	@JoinColumn(name = "username", nullable = false)
 	private User owner;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "ownerAccount", fetch = FetchType.EAGER)
 	private Set<Order> orders;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "ownerAccount", fetch = FetchType.EAGER)
 	private Set<Security> securities;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "requesterAccount", fetch = FetchType.EAGER)
 	private Set<Trade> requesterTrades;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "receiverAccount", fetch = FetchType.EAGER)
 	private Set<Trade> receiverTrades;
 
